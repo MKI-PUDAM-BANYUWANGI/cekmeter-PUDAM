@@ -25,3 +25,9 @@ Route::get('/staff', function () {
 Route::get('/tambahstaff', function () {
     return view('data-staff/tambahstaff');
 });
+Route::get('/profile', function () {
+    return view('profile/profile');
+});
+Route::get('/ubahpassword', function () {
+    return view('profile/ubahpassword');
+});
