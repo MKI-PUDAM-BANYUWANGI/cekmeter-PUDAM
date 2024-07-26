@@ -1,16 +1,16 @@
 @extends('layout.dashboard-layout')
 
-@section('title','Data Staff')
+@section('title','Admin Dashboard - Data Staff')
 
 @section('main-content')
 
 <div class="container-fluid">
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Tambah Staff/User</h1>
-    </div>
     <div class="card shadow mb-4">
+        <div class="card-header bg-primary">
+            <h3 style="color:white;">Tambah Staff/User</h3>
+        </div>
         <div class="card-body">
-            <form>
+            <form action="/staff">
                 <div class="mb-3">
                   <label for="nip" class="form-label">NIP</label>
                   <input type="number" class="form-control" id="nip">
@@ -43,13 +43,11 @@
                           <option>06 - Tegaldlimo</option>
                         </select>
                 </div>
-                <div class="mb-3">
-                  <label for="exampleInputPassword1" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="exampleInputPassword1">
+                <br>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Simpan Data</button>
+                    <button type="reset" class="btn btn-danger">Reset Data</button>
                 </div>
-                <a href="/staff">
-                    <button type="button" class="btn btn-primary">Tambah Staff</button>
-                </a>
               </form>
         </div>
     </div>

@@ -8,12 +8,11 @@
         <div class="card-header bg-primary">
             <h3 style="color:white;">Form Tambah Data Pelanggan</h3>
         </div>
-
         <div class="card-body">
             <form action="/pelanggan">
                 <div class="form-group">
                     <label for="nosp">Nomor SP</label>
-                    <input type="text" id="judul" name="judul" class="form-control" placeholder="Masukan Nomor SP">
+                    <input type="number" id="nosp" name="nosp" class="form-control" placeholder="Masukan Nomor SP">
                 </div>
                 <div class="form-group">
                     <label for="nama">Nama Pelanggan</label>

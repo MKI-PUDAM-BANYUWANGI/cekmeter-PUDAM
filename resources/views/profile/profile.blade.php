@@ -1,11 +1,11 @@
 @extends('layout.dashboard-layout')
 
-@section('title','Profile Admin')
+@section('title','Admin Dashboard - Profil Admin')
 
 @section('main-content')
 
 <div class="container-fluid">
-  <h1 class="h3 mb-0 text-gray-800">Profile Admin</h1>
+  <h1 class="h3 mb-0 text-gray-800">Profil Admin</h1>
 <form class="p-3">
     <fieldset disabled="disabled">
       <div class="form-group">

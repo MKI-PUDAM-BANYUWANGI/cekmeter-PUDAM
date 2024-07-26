@@ -1,6 +1,6 @@
 @extends('layout.dashboard-layout')
 
-@section('title','Profile Admin')
+@section('title','Admin Dashboard - Profil Admin')
 
 @section('main-content')
 
