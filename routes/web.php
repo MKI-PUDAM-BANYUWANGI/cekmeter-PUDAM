@@ -42,3 +42,11 @@ Route::get('/profile', function () {
 Route::get('/ubahpassword', function () {
     return view('profile/ubahpassword');
 });
+
+Route::get('/merkmeter', function () {
+    return view('merkmeter');
+});
+
+Route::get('/tambahmerkmeter', function () {
+    return view('tambahmerkmeter');
+});
