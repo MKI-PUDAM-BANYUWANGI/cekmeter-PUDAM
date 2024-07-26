@@ -28,7 +28,7 @@
 
     <!-- Nav Item - Data Pelanggan -->
     <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="/pelanggan">
             <i class="fas fa-fw fa-users"></i>
             <span>Data Pelanggan</span></a>
     </li>

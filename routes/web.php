@@ -16,6 +16,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('Auth/login');
 });
+
 Route::get('/dashboard', function () {
     return view('dashboard');
+});
+
+Route::get('/pelanggan', function () {
+    return view('data/pelanggan/pelanggan');
+});
+
+Route::get('/tambah-pelanggan', function () {
+    return view('data/pelanggan/tambah-pelanggan');
 });
