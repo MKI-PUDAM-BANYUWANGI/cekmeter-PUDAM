@@ -17,7 +17,7 @@
                 <table class="table table-bordered" id="dataTable" width:"100%" cellspacing="0">
               <thead class="text-center">
                 <tr>
-                  <th scope="col">No.</th>
+                  <th scope="col">No</th>
                   <th scope="col">NIP</th>
                   <th scope="col">Nama</th>
                   <th scope="col">No.Telp</th>
@@ -26,7 +26,7 @@
                   <th scope="col">Aksi</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody class="text-center">
                 <tr>
                   <th scope="row">1</th>
                   <td>2929</td>

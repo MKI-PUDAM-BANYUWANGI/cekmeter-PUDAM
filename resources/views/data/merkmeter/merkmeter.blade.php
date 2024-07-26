@@ -1,6 +1,6 @@
 @extends('layout.dashboard-layout')
 
-@section('title','Admin Dashboard - Data Pelanggan')
+@section('title','Admin Dashboard - Merk Meter')
 
 @section('main-content')
 <div class="container-fluid">

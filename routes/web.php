@@ -44,9 +44,9 @@ Route::get('/ubahpassword', function () {
 });
 
 Route::get('/merkmeter', function () {
-    return view('merkmeter');
+    return view('data/merkmeter/merkmeter');
 });
 
 Route::get('/tambahmerkmeter', function () {
-    return view('tambahmerkmeter');
+    return view('data/merkmeter/tambahmerkmeter');
 });

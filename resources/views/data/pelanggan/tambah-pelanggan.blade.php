@@ -20,7 +20,7 @@
                 </div>
                 <div class="form-group">
                     <label for="alamat">Alamat Pelanggan</label>
-                    <input type="text" id="alamat" name="alamat" class="form-control" placeholder="Masukan Alamat Pelanggan">
+                    <textarea type="text" id="alamat" name="alamat" class="form-control"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="wilayah">Wilayah</label>

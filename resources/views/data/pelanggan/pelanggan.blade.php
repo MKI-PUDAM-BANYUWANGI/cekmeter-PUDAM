@@ -31,7 +31,7 @@
                             <th>Aksi</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="text-center">
                         <tr>
                             <td>1</td>
                             <td>01234567</td>
