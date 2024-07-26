@@ -19,3 +19,9 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 });
+Route::get('/staff', function () {
+    return view('data-staff/staff');
+});
+Route::get('/tambahstaff', function () {
+    return view('data-staff/tambahstaff');
+});
