@@ -30,21 +30,21 @@
     <li class="nav-item">
         <a class="nav-link" href="/pelanggan">
             <i class="fas fa-fw fa-users"></i>
-            <span>Data Pelanggan</span></a>
+            <span>Pelanggan</span></a>
     </li>
 
     <!-- Nav Item - Data Merk Meter -->
     <li class="nav-item">
         <a class="nav-link" href="#">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Data Merk Meter</span></a>
+            <span>Merk Meter</span></a>
     </li>
 
     <!-- Nav Item - Data Staff -->
     <li class="nav-item">
         <a class="nav-link" href="/staff">
             <i class="fas fa-fw fa-user"></i>
-            <span>Data Staff/User</span></a>
+            <span>Staff/User</span></a>
     </li>
 
     <!-- Divider -->
