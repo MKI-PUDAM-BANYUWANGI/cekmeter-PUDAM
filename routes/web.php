@@ -19,3 +19,9 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 });
+Route::get('/merkmeter', function () {
+    return view('merkmeter');
+});
+Route::get('/tambahmerkmeter', function () {
+    return view('tambahmerkmeter');
+});
