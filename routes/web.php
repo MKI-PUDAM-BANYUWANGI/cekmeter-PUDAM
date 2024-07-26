@@ -28,3 +28,11 @@ Route::get('/pelanggan', function () {
 Route::get('/tambah-pelanggan', function () {
     return view('data/pelanggan/tambah-pelanggan');
 });
+
+Route::get('/staff', function () {
+    return view('data/staff/staff');
+});
+
+Route::get('/tambahstaff', function () {
+    return view('data/staff/tambahstaff');
+});
