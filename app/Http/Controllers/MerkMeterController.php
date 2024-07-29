@@ -13,7 +13,9 @@ class MerkMeterController extends Controller
      */
     public function index()
     {
-        //
+        return view('data.merkmeter.merkmeter', [
+            //
+        ]);
     }
 
     /**
@@ -21,7 +23,9 @@ class MerkMeterController extends Controller
      */
     public function create()
     {
-        //
+        return view('data.merkmeter.tambahmerkmeter', [
+            //
+        ]);
     }
 
     /**
@@ -29,7 +33,14 @@ class MerkMeterController extends Controller
      */
     public function store(StoreMerkMeterRequest $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nama_merk' => 'nullable'
+        ]);
+
+        MerkMeter::create($validatedData);
+
+        return redirect(route('data.merkmeter.merkmeter'))->with('Berhasil menambahkan merk meter!');
+
     }
 
     /**

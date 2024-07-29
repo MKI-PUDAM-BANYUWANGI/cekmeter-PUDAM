@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,13 +15,29 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('Auth/login');
+// Login
+Route::controller(LoginController::class)->group(function(){
+
+    Route::get('/', 'index');
+
+    Route::get('logout', 'logout')->name('logout');
+
+    Route::post('validate_login', 'validate_login')->name('sample.validate_login');
+
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
+// dashboard harus login
+Route::group(['middleware' => ['auth']], function() {
+    Route::get('dashboard', [LoginController::class, 'dashboard'])->name('dashboard');
 });
+
+// Route::get('/', [AuthLoginController::class, 'index'])->name('login');
+// Route::post('/', [LoginController::class, 'authenticate']);
+
+// Route::get('/dashboard', function () {
+//         return view('dashboard');
+//     })->name('dashboard')->middleware('auth');
+
 
 Route::get('/pelanggan', function () {
     return view('data/pelanggan/pelanggan');
