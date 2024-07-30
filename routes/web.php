@@ -4,6 +4,8 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\MerkMeterController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\PelangganController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +31,10 @@ Route::controller(LoginController::class)->group(function(){
 
 // dashboard harus login
 Route::group(['middleware' => ['auth']], function() {
-    Route::get('/dashboard', [LoginController::class, 'dashboard'])->name('dashboard');
+    Route::get('dashboard', [LoginController::class, 'dashboard'])->name('dashboard');
+    // Pelanggan
+    Route::resource('pelanggan', PelangganController::class);
+    // Merk Meter
     Route::resource('/dashboard/merkmeter', MerkMeterController::class);
 });
 
@@ -43,13 +48,13 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
 //     })->name('dashboard')->middleware('auth');
 
 
-Route::get('/pelanggan', function () {
-    return view('data/pelanggan/pelanggan');
-});
+// Route::get('/pelanggan', function () {
+//     return view('data/pelanggan/pelanggan');
+// });
 
-Route::get('/tambah-pelanggan', function () {
-    return view('data/pelanggan/tambah-pelanggan');
-});
+// Route::get('/tambah-pelanggan', function () {
+//     return view('data/pelanggan/tambah-pelanggan');
+// });
 
 Route::get('/staff', function () {
     return view('data/staff/staff');

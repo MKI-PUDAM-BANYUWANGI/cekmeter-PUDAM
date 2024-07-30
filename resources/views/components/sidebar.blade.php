@@ -28,7 +28,7 @@
 
     <!-- Nav Item - Data Pelanggan -->
     <li class="nav-item">
-        <a class="nav-link" href="/pelanggan">
+        <a class="nav-link" href="{{ route('pelanggan.index') }}">
             <i class="fas fa-fw fa-users"></i>
             <span>Pelanggan</span></a>
     </li>
