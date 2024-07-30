@@ -14,7 +14,7 @@ class MerkMeterController extends Controller
     {
         return view('data.merkmeter.merkmeter', [
             'merks' => MerkMeter::all()
-        ]);
+        ], compact('totalmerk'));
     }
 
     /**

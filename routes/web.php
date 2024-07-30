@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\MerkMeterController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,6 +32,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/dashboard', [LoginController::class, 'dashboard'])->name('dashboard');
     Route::resource('/dashboard/merkmeter', MerkMeterController::class);
 });
+
+Route::get('/dashboard', [DashboardController::class, 'index']);
 
 // Route::get('/', [AuthLoginController::class, 'index'])->name('login');
 // Route::post('/', [LoginController::class, 'authenticate']);
