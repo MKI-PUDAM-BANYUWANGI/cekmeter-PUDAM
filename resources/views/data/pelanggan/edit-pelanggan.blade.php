@@ -15,7 +15,7 @@
                     @endforeach
                 </ul>
             </div>
-        @endif
+            @endif
         </div>
         <div class="card-body">
             <form action="{{ route('pelanggan.update', $pelanggan->id) }}" method="POST" enctype="multipart/form-data">

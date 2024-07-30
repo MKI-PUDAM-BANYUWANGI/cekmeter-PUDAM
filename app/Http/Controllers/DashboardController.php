@@ -14,7 +14,7 @@ class DashboardController extends Controller
     public function index() {
         $merkCount = MerkMeter::count();
         // $staffCount = Staff::count();
-        // $pelangganCount = Pelanggan::count();
-        return view('dashboard', compact('merkCount'));
+        $pelangganCount = Pelanggan::count();
+        return view('dashboard', compact('merkCount', 'pelangganCount'));
     }
 }

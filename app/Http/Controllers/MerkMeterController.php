@@ -12,9 +12,8 @@ class MerkMeterController extends Controller
      */
     public function index()
     {
-        return view('data.merkmeter.merkmeter', [
-            'merks' => MerkMeter::all()
-        ], compact('totalmerk'));
+        $merks = MerkMeter::all();
+        return view('data.merkmeter.merkmeter', compact('merks'));
     }
 
     /**
@@ -31,12 +30,12 @@ class MerkMeterController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'nama_merk' => 'nullable'
+            'nama_merk' => 'required|min:3'
         ]);
 
         MerkMeter::create($validatedData);
 
-        return redirect(route('merkmeter.index'))->with('Berhasil menambahkan merk meter!');
+        return redirect(route('merkmeter.index'))->with('success', 'Data berhasil ditambahkan!');
 
     }
 
@@ -55,10 +54,8 @@ class MerkMeterController extends Controller
      */
     public function edit($id)
     {
-        $merk = MerkMeter::findorfail($id);
-        return view('data.merkmeter.editmerkmeter', [
-            'merk' => $merk
-        ]);
+        $merks = MerkMeter::findorfail($id);
+        return view('data.merkmeter.editmerkmeter', compact('merks'));
     }
 
     /**
@@ -66,13 +63,13 @@ class MerkMeterController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $merk = MerkMeter::findOrFail($id);
+        $merks = MerkMeter::findOrFail($id);
         $validatedData = $request->validate([
         'nama_merk' => 'required|string|max:255',
         ]);
-        $merk->update($validatedData);
-    
-        return redirect(route('merkmeter.index'))->with('success', 'Berhasil mengubah merk!');
+        $merks->update($validatedData);
+
+        return redirect(route('merkmeter.index'))->with('success', 'Data berhasil diubah!');
     }
 
     /**

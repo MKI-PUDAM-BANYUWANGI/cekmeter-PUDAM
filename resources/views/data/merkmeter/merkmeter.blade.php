@@ -6,12 +6,6 @@
 
 
 <div class="container-fluid">
-    
-    @if(session()->has('success'))
-    <div class="alert alert-success col-lg-8" role="alert">
-      {{ session('success') }}
-    </div>
-    @endif
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -23,6 +17,11 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-body">
+            @if ($message = Session::get('success'))
+            <div class="alert alert-success">
+                {{ $message }}
+            </div>
+            @endif
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead class="text-center">
@@ -39,12 +38,15 @@
                             <td>{{ $merk->nama_merk }}</td>
                             <td>
                                 <!-- Update Button -->
-                                <a href="{{ route('merkmeter.edit', $merk->id) }}" class="btn btn-info"><i class="fas fa-edit"></i></a>
+                                <a href="{{ route('merkmeter.edit', $merk->id) }}" class="btn btn-info"><i
+                                        class="fas fa-edit"></i></a>
                                 <!-- Delete Button -->
-                                <form action="{{ route('merkmeter.destroy', $merk->id) }}" method="POST" class="d-inline">
+                                <form action="{{ route('merkmeter.destroy', $merk->id) }}" method="POST"
+                                    class="d-inline">
                                     @method('delete')
                                     @csrf
-                                    <button class="btn btn-danger" onclick="return confirm('Yakin menghapus post?')"><i class="fas fa-trash-alt"></i></button>
+                                    <button class="btn btn-danger" onclick="return confirm('Yakin menghapus data?')"><i
+                                            class="fas fa-trash-alt"></i></button>
                                 </form>
                             </td>
                         </tr>

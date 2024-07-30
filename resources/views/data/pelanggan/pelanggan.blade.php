@@ -64,7 +64,7 @@
                                     class="d-inline">
                                     @csrf
                                     @method('delete')
-                                    <button class="btn btn-danger">
+                                    <button class="btn btn-danger" onclick="return confirm('Yakin menghapus data?')">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </form>

@@ -32,13 +32,13 @@ Route::controller(LoginController::class)->group(function(){
 // dashboard harus login
 Route::group(['middleware' => ['auth']], function() {
     Route::get('dashboard', [LoginController::class, 'dashboard'])->name('dashboard');
+    // Dashboard
+    Route::get('/dashboard', [DashboardController::class, 'index']);
     // Pelanggan
     Route::resource('pelanggan', PelangganController::class);
     // Merk Meter
     Route::resource('/dashboard/merkmeter', MerkMeterController::class);
 });
-
-Route::get('/dashboard', [DashboardController::class, 'index']);
 
 // Route::get('/', [AuthLoginController::class, 'index'])->name('login');
 // Route::post('/', [LoginController::class, 'authenticate']);
