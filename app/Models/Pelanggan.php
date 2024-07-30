@@ -9,6 +9,8 @@ class Pelanggan extends Model
 {
     use HasFactory;
 
+    protected $table = 'pelanggans';
+
     protected $fillable = [
         'id',
         'no_sp',
@@ -16,8 +18,15 @@ class Pelanggan extends Model
         'alamat',
         'wilayah',
         'foto_meter',
-        'nama_merk',
+        'merk_meter',
         'kondisi_meter',
         'tanggal_cek'
     ];
+
+    protected $hidden = [];
+
+    public function nama_merk()
+    {
+        return $this->belongsTo(MerkMeter::class, 'id_merk', 'id');
+    }
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\PelangganController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,8 @@ Route::controller(LoginController::class)->group(function(){
 // dashboard harus login
 Route::group(['middleware' => ['auth']], function() {
     Route::get('dashboard', [LoginController::class, 'dashboard'])->name('dashboard');
+    // Pelanggan
+    Route::resource('pelanggan', PelangganController::class);
 });
 
 // Route::get('/', [AuthLoginController::class, 'index'])->name('login');
@@ -39,9 +42,9 @@ Route::group(['middleware' => ['auth']], function() {
 //     })->name('dashboard')->middleware('auth');
 
 
-Route::get('/pelanggan', function () {
-    return view('data/pelanggan/pelanggan');
-});
+// Route::get('/pelanggan', function () {
+//     return view('data/pelanggan/pelanggan');
+// });
 
 Route::get('/tambah-pelanggan', function () {
     return view('data/pelanggan/tambah-pelanggan');

@@ -13,14 +13,15 @@ return new class extends Migration
     {
         Schema::create('pelanggans', function (Blueprint $table) {
             $table->id();
-            $table->string('no_sp', 11);
-            $table->string('nama_pelanggan', 50);
-            $table->string('alamat', 50);
-            $table->string('wilayah', 50);
+            $table->string('no_sp');
+            $table->string('nama_pelanggan');
+            $table->string('alamat');
+            $table->string('wilayah');
             $table->string('foto_meter')->nullable();
-            $table->string('nama_merk', 50)->nullable();
-            $table->string('kondisi_meter', 50)->nullable();
-            $table->timestamp('tanggal_cek')->nullable();
+            $table->string('merk_meter')->nullable();
+            $table->string('kondisi_meter')->nullable();
+            $table->date('tanggal_cek')->nullable();
+            $table->timestamps();
         });
     }
 
