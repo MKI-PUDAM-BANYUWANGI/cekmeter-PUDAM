@@ -3,12 +3,20 @@
 @section('title','Admin Dashboard - Merk Meter')
 
 @section('main-content')
+
+
 <div class="container-fluid">
+    
+    @if(session()->has('success'))
+    <div class="alert alert-success col-lg-8" role="alert">
+      {{ session('success') }}
+    </div>
+    @endif
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Data Merk Meter</h1>
-        <a href="/tambahmerkmeter" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+        <a href="{{ route('merkmeter.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                 class="fas fa-plus fa-sm text-white-50"></i> Tambah Data <i></i></a>
     </div>
 
@@ -25,16 +33,22 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($merks as $merk)
                         <tr class="text-center">
-                            <td>1</td>
-                            <td>Sanyo</td>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $merk->nama_merk }}</td>
                             <td>
                                 <!-- Update Button -->
-                                <a href="#" class="btn btn-info"><i class="fas fa-edit"></i></a>
+                                <a href="{{ route('merkmeter.edit', $merk->id) }}" class="btn btn-info"><i class="fas fa-edit"></i></a>
                                 <!-- Delete Button -->
-                                <a href="#" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                <form action="{{ route('merkmeter.destroy', $merk->id) }}" method="POST" class="d-inline">
+                                    @method('delete')
+                                    @csrf
+                                    <button class="btn btn-danger" onclick="return confirm('Yakin menghapus post?')"><i class="fas fa-trash-alt"></i></button>
+                                </form>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

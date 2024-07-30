@@ -35,7 +35,7 @@
 
     <!-- Nav Item - Data Merk Meter -->
     <li class="nav-item">
-        <a class="nav-link" href="/merkmeter">
+        <a class="nav-link" href="/dashboard/merkmeter">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Merk Meter</span></a>
     </li>

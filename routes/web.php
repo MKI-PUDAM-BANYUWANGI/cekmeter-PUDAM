@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\MerkMeterController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +28,8 @@ Route::controller(LoginController::class)->group(function(){
 
 // dashboard harus login
 Route::group(['middleware' => ['auth']], function() {
-    Route::get('dashboard', [LoginController::class, 'dashboard'])->name('dashboard');
+    Route::get('/dashboard', [LoginController::class, 'dashboard'])->name('dashboard');
+    Route::resource('/dashboard/merkmeter', MerkMeterController::class);
 });
 
 // Route::get('/', [AuthLoginController::class, 'index'])->name('login');
@@ -61,10 +62,10 @@ Route::get('/ubahpassword', function () {
     return view('profile/ubahpassword');
 });
 
-Route::get('/merkmeter', function () {
-    return view('data/merkmeter/merkmeter');
-});
+// Route::get('/merkmeter', function () {
+//     return view('data/merkmeter/merkmeter');
+// });
 
-Route::get('/tambahmerkmeter', function () {
-    return view('data/merkmeter/tambahmerkmeter');
-});
+// Route::get('/tambahmerkmeter', function () {
+//     return view('data/merkmeter/tambahmerkmeter');
+// });

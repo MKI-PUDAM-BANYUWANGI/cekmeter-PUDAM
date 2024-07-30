@@ -11,6 +11,13 @@ class MerkMeter extends Model
 
     protected $fillable = [
         'id',
-        'nama_merk'
+        'nama_merk',
+        'created_at',
+        'updated_at'
     ];
+
+    public function getRouteKeyName()
+    {
+        return 'id';
+    }
 }
