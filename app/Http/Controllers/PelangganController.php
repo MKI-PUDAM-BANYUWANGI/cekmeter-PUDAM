@@ -25,9 +25,8 @@ class PelangganController extends Controller
      */
     public function create()
     {
-        // $merkmeter = MerkMeter::all();
-
-        return view('data.pelanggan.tambah-pelanggan');
+        $merkmeter = MerkMeter::all();
+        return view('data.pelanggan.tambah-pelanggan', compact('merkmeter'));
     }
 
     /**
@@ -41,7 +40,7 @@ class PelangganController extends Controller
             'nama_pelanggan' => 'required',
             'alamat' => 'required',
             'wilayah' => 'required',
-            'merk_meter' => 'nullable',
+            'merk_meter_id' => 'nullable|exists:merk_meters,id',
             'kondisi_meter' => 'nullable',
             'tanggal_cek' => 'nullable|date',
             'foto_meter' => 'nullable|mimes:png,jpg,jpeg,gif,bmp,webp'
@@ -75,9 +74,11 @@ class PelangganController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Pelanggan $pelanggan)
+    public function edit($id)
     {
-        return view('data.pelanggan.edit-pelanggan', compact('pelanggan'));
+        $pelanggan = Pelanggan::findOrFail($id);
+        $merkmeter = MerkMeter::all();
+        return view('data.pelanggan.edit-pelanggan', compact('pelanggan', 'merkmeter'));
     }
 
     /**
@@ -90,7 +91,7 @@ class PelangganController extends Controller
             'nama_pelanggan' => 'required',
             'alamat' => 'required',
             'wilayah' => 'required',
-            'merk_meter' => 'nullable',
+            'merk_meter_id' => 'nullable|exists:merk_meters,id',
             'kondisi_meter' => 'nullable',
             'tanggal_cek' => 'nullable|date',
             'foto_meter' => 'nullable|mimes:png,jpg,jpeg,gif,bmp,webp'

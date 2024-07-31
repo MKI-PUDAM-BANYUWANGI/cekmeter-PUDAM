@@ -18,15 +18,15 @@ class Pelanggan extends Model
         'alamat',
         'wilayah',
         'foto_meter',
-        'merk_meter',
+        'merk_meter_id',
         'kondisi_meter',
         'tanggal_cek'
     ];
 
     protected $hidden = [];
 
-    public function nama_merk()
+    public function merkMeter()
     {
-        return $this->belongsTo(MerkMeter::class, 'id_merk', 'id');
+        return $this->belongsTo(MerkMeter::class, 'merk_meter_id');
     }
 }

@@ -8,13 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class MerkMeter extends Model
 {
     use HasFactory;
+    protected $table = 'merk_meters';
 
-    protected $fillable = [
-        'id',
-        'nama_merk',
-        'created_at',
-        'updated_at'
-    ];
+    protected $fillable = ['nama_merk'];
+
+    protected $hidden = [];
 
     public function getRouteKeyName()
     {

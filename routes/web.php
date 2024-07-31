@@ -36,11 +36,11 @@ Route::group(['middleware' => ['auth']], function() {
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index']);
     // Pelanggan
-    Route::resource('pelanggan', PelangganController::class);
+    Route::resource('/dashboard/pelanggan', PelangganController::class);
     // Merk Meter
     Route::resource('/dashboard/merkmeter', MerkMeterController::class);
     // staff/user
-    Route::resource('staff', StaffController::class);
+    Route::resource('/dashboard/staff', StaffController::class);
 });
 
 // Route::get('/', [AuthLoginController::class, 'index'])->name('login');

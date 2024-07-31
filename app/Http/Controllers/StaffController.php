@@ -87,7 +87,7 @@ class StaffController extends Controller
             'nama_staff' => $request->nama_staff,
             'no_telepon' => $request->no_telepon,
             'wilayah' => $request->wilayah,
-            'password' => $request->password ? ($request->password) : $staff->password,
+            'password' => $request->password ? ($request->password) : $staffs->password,
         ]);
 
         return redirect()->route('staff.index')->with('success', 'Data Staff berhasil diperbarui');

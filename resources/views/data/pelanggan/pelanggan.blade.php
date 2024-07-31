@@ -52,7 +52,7 @@
                                 Tidak ada foto
                                 @endif
                             </td>
-                            <td>{{ $object -> merk_meter ?? 'Belum Ada' }}</td>
+                            <td>{{ $object -> merkMeter -> nama_merk ?? 'Belum Ada' }}</td>
                             <td>{{ $object -> kondisi_meter ?? 'Belum Ada' }}</td>
                             <td>{{ $object -> tanggal_cek ?? 'Belum Dicek' }}</td>
                             <td>
