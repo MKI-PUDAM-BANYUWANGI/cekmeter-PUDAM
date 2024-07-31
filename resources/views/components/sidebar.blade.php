@@ -42,7 +42,7 @@
 
     <!-- Nav Item - Data Staff -->
     <li class="nav-item">
-        <a class="nav-link" href="/staff">
+        <a class="nav-link" href="{{ route('staff.index') }}">
             <i class="fas fa-fw fa-user"></i>
             <span>Staff/User</span></a>
     </li>

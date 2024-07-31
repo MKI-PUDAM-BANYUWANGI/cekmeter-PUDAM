@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\PelangganController;
+use App\Http\Controllers\StaffController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('pelanggan', PelangganController::class);
     // Merk Meter
     Route::resource('/dashboard/merkmeter', MerkMeterController::class);
+    // staff/user
+    Route::resource('staff', StaffController::class);
 });
 
 // Route::get('/', [AuthLoginController::class, 'index'])->name('login');
@@ -56,13 +59,13 @@ Route::group(['middleware' => ['auth']], function() {
 //     return view('data/pelanggan/tambah-pelanggan');
 // });
 
-Route::get('/staff', function () {
-    return view('data/staff/staff');
-});
+// Route::get('/staff', function () {
+//     return view('data/staff/staff');
+// });
 
-Route::get('/tambahstaff', function () {
-    return view('data/staff/tambahstaff');
-});
+// Route::get('/tambahstaff', function () {
+//     return view('data/staff/tambahstaff');
+// });
 Route::get('/profile', function () {
     return view('profile/profile');
 });

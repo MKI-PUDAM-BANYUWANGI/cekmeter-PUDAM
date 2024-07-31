@@ -9,6 +9,8 @@ class Staff extends Model
 {
     use HasFactory;
 
+    protected $table = 'staffs';
+
     protected $fillable = [
         'id',
         'nip',
@@ -16,5 +18,8 @@ class Staff extends Model
         'no_telepon',
         'wilayah',
         'password'
+    ];
+    protected $hidden = [
+        'password',
     ];
 }

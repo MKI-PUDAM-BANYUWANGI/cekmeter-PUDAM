@@ -27,7 +27,6 @@
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Simpan Data</button>
-                    <button type="reset" class="btn btn-danger">Reset Data</button>
                 </div>
         </div>
         </form>
