@@ -44,7 +44,7 @@
                         <option>06 - Tegaldlimo</option>
                     </select>
                 </div>
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <label for="merk_meter_id">Merk Meter</label>
                     <select class="form-control" id="merk_meter_id" name="merk_meter_id">
                         <option value="">Pilih Merk Meter</option>
@@ -70,7 +70,7 @@
                 <div class="form-group">
                     <label for="foto_meter">Foto Meter</label>
                     <input type="file" class="form-control" id="foto_meter" name="foto_meter">
-                </div>
+                </div> --}}
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Simpan Data</button>
                     <button type="reset" class="btn btn-danger">Reset Data</button>

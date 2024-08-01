@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\StaffController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,9 @@ use App\Http\Controllers\StaffController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+// Auth
+// Auth::routes();
 
 // Login
 Route::controller(LoginController::class)->group(function(){
