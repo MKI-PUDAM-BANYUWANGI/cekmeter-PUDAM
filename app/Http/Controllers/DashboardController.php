@@ -16,4 +16,12 @@ class DashboardController extends Controller
         $pelanggan = Pelanggan::count();
         return view('dashboard', compact('pelanggan', 'merkmeter', 'staff'));
     }
+
+    public function profile() {
+        return view('profile.profile');
+    }
+
+    public function changepassword() {
+        return view('profile.ubahpassword');
+    }
 }

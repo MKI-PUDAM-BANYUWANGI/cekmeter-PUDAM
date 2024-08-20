@@ -10,14 +10,14 @@
     <fieldset disabled="disabled">
       <div class="form-group">
         <label for="exampleInputEmail1">Nama</label>
-        <input type="email" class="form-control" id="disabledTextInput" aria-describedby="emailHelp" placeholder="Admin">
+        <input type="email" class="form-control" id="disabledTextInput" aria-describedby="emailHelp" placeholder="{{ Auth::user()-> name }}">
       </div>
       <div class="form-group">
         <label for="exampleInputEmail1">Email</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="admincekmeter24@gmail.com">
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="{{ Auth::user()-> email }}">
       </div>
     </fieldset>
-    <a href="/ubahpassword">
+    <a href="/ubah-password">
       <button type="button" class="btn btn-primary">Ubah Password</button>
     </a>
     </form>

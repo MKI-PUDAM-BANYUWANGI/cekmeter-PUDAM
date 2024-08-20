@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\Auth;
 // Login
 Route::controller(LoginController::class)->group(function(){
 
-    Route::get('/', 'index');
+    Route::get('/', 'index')->name('login');
 
     Route::get('logout', 'logout')->name('logout');
 
@@ -45,42 +45,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('/dashboard/merkmeter', MerkMeterController::class);
     // staff/user
     Route::resource('/dashboard/staff', StaffController::class);
+    // Profil
+    Route::get('/profile', [DashboardController::class, 'profile'])->name('profile');
+    // Ubah Password
+    Route::get('/ubah-password', [DashboardController::class, 'changepassword']);
 });
-
-// Route::get('/', [AuthLoginController::class, 'index'])->name('login');
-// Route::post('/', [LoginController::class, 'authenticate']);
-
-// Route::get('/dashboard', function () {
-//         return view('dashboard');
-//     })->name('dashboard')->middleware('auth');
-
-
-// Route::get('/pelanggan', function () {
-//     return view('data/pelanggan/pelanggan');
-// });
-
-// Route::get('/tambah-pelanggan', function () {
-//     return view('data/pelanggan/tambah-pelanggan');
-// });
-
-// Route::get('/staff', function () {
-//     return view('data/staff/staff');
-// });
-
-// Route::get('/tambahstaff', function () {
-//     return view('data/staff/tambahstaff');
-// });
-Route::get('/profile', function () {
-    return view('profile/profile');
-});
-Route::get('/ubahpassword', function () {
-    return view('profile/ubahpassword');
-});
-
-// Route::get('/merkmeter', function () {
-//     return view('data/merkmeter/merkmeter');
-// });
-
-// Route::get('/tambahmerkmeter', function () {
-//     return view('data/merkmeter/tambahmerkmeter');
-// });
