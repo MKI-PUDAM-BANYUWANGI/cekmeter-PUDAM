@@ -8,25 +8,43 @@
         <div class="card-header bg-primary">
             <h3 style="color:white;">Form Tambah Data Pelanggan</h3>
             @if ($errors->any())
-            <div class="alert alert-danger">
+            <div class="alert alert-danger my-3">
                 <ul>
                     @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
+                    <li>{{ $error }}</li>
                     @endforeach
                 </ul>
             </div>
-        @endif
+            @endif
+            @if (Session::get('success'))
+            <div class="alert alert-success alert-dismissible fade show mb-3" role="alert">
+                {{ Session::get('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @endif
+            @if (Session::get('error'))
+            <div class="alert alert-danger alert-dismissible fade show mb-3" role="alert">
+                {{ Session::get('danger') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @endif
         </div>
         <div class="card-body">
             <form action="{{ route('pelanggan.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label for="no_sp">Nomor SP</label>
-                    <input type="number" id="no_sp" name="no_sp" class="form-control" placeholder="Masukan Nomor SP" required>
+                    <input type="number" id="no_sp" name="no_sp" class="form-control" placeholder="Masukan Nomor SP"
+                        required>
                 </div>
                 <div class="form-group">
                     <label for="nama">Nama Pelanggan</label>
-                    <input type="text" id="nama_pelanggan" name="nama_pelanggan" class="form-control" placeholder="Masukan Nama Pelanggan" required>
+                    <input type="text" id="nama_pelanggan" name="nama_pelanggan" class="form-control"
+                        placeholder="Masukan Nama Pelanggan" required>
                 </div>
                 <div class="form-group">
                     <label for="alamat">Alamat Pelanggan</label>
@@ -35,7 +53,7 @@
                 <div class="form-group">
                     <label for="wilayah">Wilayah</label>
                     <select id="wilayah" name="wilayah" class="form-control">
-                        <option selected>Pilih Wilayah</option>
+                        <option selected disabled>Pilih Wilayah</option>
                         <option>01 - Banyuwangi</option>
                         <option>02 - Rogojampi</option>
                         <option>03 - Muncar</option>
@@ -49,7 +67,7 @@
                     <select class="form-control" id="merk_meter_id" name="merk_meter_id">
                         <option value="">Pilih Merk Meter</option>
                         @foreach($merkmeter as $meter)
-                            <option value="{{ $meter->id }}">{{ $meter->nama_merk }}</option>
+                        <option value="{{ $meter->id }}">{{ $meter->nama_merk }}</option>
                         @endforeach
                     </select>
                 </div>

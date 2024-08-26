@@ -28,7 +28,7 @@ Route::controller(LoginController::class)->group(function(){
 
     Route::get('/', 'index')->name('login');
 
-    Route::get('logout', 'logout')->name('logout');
+    Route::post('logout', 'logout')->name('logout');
 
     Route::post('validate_login', 'validate_login')->name('sample.validate_login');
 

@@ -8,12 +8,28 @@
         <div class="card-header bg-primary">
             <h3 style="color:white;">Form Ubah Data Pelanggan</h3>
             @if ($errors->any())
-            <div class="alert alert-danger">
+            <div class="alert alert-danger my-3">
                 <ul>
                     @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
+                    <li>{{ $error }}</li>
                     @endforeach
                 </ul>
+            </div>
+            @endif
+            @if (Session::get('success'))
+            <div class="alert alert-success alert-dismissible fade show mb-3" role="alert">
+                {{ Session::get('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @endif
+            @if (Session::get('error'))
+            <div class="alert alert-danger alert-dismissible fade show mb-3" role="alert">
+                {{ Session::get('danger') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             @endif
         </div>

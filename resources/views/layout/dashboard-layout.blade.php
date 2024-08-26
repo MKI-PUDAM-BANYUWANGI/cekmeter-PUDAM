@@ -82,8 +82,11 @@
                 </div>
                 <div class="modal-body">Pilih "Logout" jika sudah yakin untuk mengakhiri sesi ini.</div>
                 <div class="modal-footer">
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-danger" href="{{ route('logout') }}">Logout</a>
+                    <a class="btn btn-danger" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                 </div>
             </div>
         </div>

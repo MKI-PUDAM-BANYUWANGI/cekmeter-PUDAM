@@ -39,11 +39,11 @@ class PelangganController extends Controller
             'no_sp' => 'required',
             'nama_pelanggan' => 'required',
             'alamat' => 'required',
-            'wilayah' => 'required',
+            'wilayah' => 'required|not_in:Pilih Wilayah',
             'merk_meter_id' => 'nullable|exists:merk_meters,id',
             'kondisi_meter' => 'nullable',
             'tanggal_cek' => 'nullable|date',
-            'foto_meter' => 'nullable|mimes:png,jpg,jpeg,gif,bmp,webp'
+            'foto_meter' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120'
         ]);
 
         // Mengambil semua data request kecuali 'foto_meter'
@@ -90,11 +90,11 @@ class PelangganController extends Controller
             'no_sp' => 'required',
             'nama_pelanggan' => 'required',
             'alamat' => 'required',
-            'wilayah' => 'required',
+            'wilayah' => 'required|not_in:Pilih Wilayah',
             'merk_meter_id' => 'nullable|exists:merk_meters,id',
             'kondisi_meter' => 'nullable',
             'tanggal_cek' => 'nullable|date',
-            'foto_meter' => 'nullable|mimes:png,jpg,jpeg,gif,bmp,webp'
+            'foto_meter' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120'
         ]);
 
         $pelanggan = Pelanggan::findOrFail($id);
