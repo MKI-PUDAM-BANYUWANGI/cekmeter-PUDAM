@@ -20,3 +20,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // Pelanggan
 Route::apiResource('/pelanggan', App\Http\Controllers\API\PelangganController::class);
+
+// Merk Meter
+Route::apiResource('/merk-meter', App\Http\Controllers\API\MerkMeterController::class);
+
+// Staff
+Route::apiResource('/staff', App\Http\Controllers\API\StaffController::class);
