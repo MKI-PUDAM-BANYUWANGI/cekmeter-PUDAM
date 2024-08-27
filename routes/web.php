@@ -48,5 +48,6 @@ Route::group(['middleware' => ['auth']], function() {
     // Profil
     Route::get('/profile', [DashboardController::class, 'profile'])->name('profile');
     // Ubah Password
-    Route::get('/ubah-password', [DashboardController::class, 'changepassword']);
+    Route::get('/profile/ubah-password', [DashboardController::class, 'ubahpassword'])->name('ubahPassword');
+    Route::post('/ubah-password', [DashboardController::class, 'changepassword'])->name('profile.ubahPassword');
 });
