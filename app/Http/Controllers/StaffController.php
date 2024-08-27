@@ -7,6 +7,7 @@ use App\Http\Requests\StoreStaffRequest;
 use App\Http\Requests\UpdateStaffRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
 
 
 class StaffController extends Controller
@@ -49,7 +50,10 @@ class StaffController extends Controller
             'password' => $request->password,
         ]);
 
-        return redirect()->route('staff.index')->with('success', 'Data Staff Berhasil Di Tambahkan.');
+        // Menampilkan SweetAlert
+        Alert::success('Berhasil!', 'Data Staff Berhasil Ditambahkan!');
+
+        return redirect()->route('staff.index');
     }
 
     /**
@@ -90,7 +94,10 @@ class StaffController extends Controller
             'password' => $request->password ? ($request->password) : $staffs->password,
         ]);
 
-        return redirect()->route('staff.index')->with('success', 'Data Staff berhasil diperbarui');
+        // Menampilkan SweetAlert
+        Alert::success('Berhasil!', 'Data Staff berhasil diperbarui!');
+
+        return redirect()->route('staff.index');
     }
 
     /**
@@ -99,6 +106,8 @@ class StaffController extends Controller
     public function destroy($id)
     {
         Staff::findOrFail($id)->delete();
-        return redirect()->route('staff.index')->with('success', 'Data Staff berhasil dihapus');
+        // Menampilkan SweetAlert
+        Alert::success('Berhasil!', 'Data Staff berhasil dihapus!');
+        return redirect()->route('staff.index');
     }
 }

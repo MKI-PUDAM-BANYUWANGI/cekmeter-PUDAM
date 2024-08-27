@@ -41,11 +41,10 @@
                                 <a href="{{ route('merkmeter.edit', $merk->id) }}" class="btn btn-info"><i
                                         class="fas fa-edit"></i></a>
                                 <!-- Delete Button -->
-                                <form action="{{ route('merkmeter.destroy', $merk->id) }}" method="POST"
-                                    class="d-inline">
-                                    @method('delete')
+                                <form id="delete-form-{{ $merk->id }}" action="{{ route('merkmeter.destroy', $merk->id) }}" method="POST" class="d-inline">
+                                    @method('DELETE')
                                     @csrf
-                                    <button class="btn btn-danger" onclick="return confirm('Yakin menghapus data?')"><i
+                                    <button type="button" class="btn btn-danger" onclick="confirmDelete({{ $merk->id }})"><i
                                             class="fas fa-trash-alt"></i></button>
                                 </form>
                             </td>

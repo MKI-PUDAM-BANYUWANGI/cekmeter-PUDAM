@@ -60,11 +60,11 @@
                                 <a href="{{ route('pelanggan.edit', $object->id)}}" class="btn btn-info"><i
                                         class="fas fa-edit"></i></a>
                                 <!-- Delete Button -->
-                                <form action="{{route('pelanggan.destroy', $object->id)}}" method="POST"
-                                    class="d-inline">
+                                <form id="delete-form-{{ $object->id }}" action="{{route('pelanggan.destroy', $object->id)}}" method="POST" class="d-inline">
                                     @csrf
-                                    @method('delete')
-                                    <button class="btn btn-danger" onclick="return confirm('Yakin menghapus data?')">
+                                    @method('DELETE')
+                                    <!-- Perbaikan tombol delete -->
+                                    <button type="button" class="btn btn-danger" onclick="confirmDelete({{ $object->id }})">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </form>

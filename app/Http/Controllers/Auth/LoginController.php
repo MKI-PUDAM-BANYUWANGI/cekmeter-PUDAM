@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash as FacadesHash;
 use Illuminate\Support\Facades\Session as FacadesSession;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class LoginController extends Controller
 {
@@ -32,7 +33,10 @@ class LoginController extends Controller
             return redirect('dashboard');
         }
 
-        return redirect('/')->with('info', 'Maaf, Email atau Password Salah!');
+        // Menampilkan SweetAlert
+        Alert::info('Maaf!', 'Email atau Password Salah!');
+
+        return redirect('/');
     }
 
     function dashboard()
@@ -42,7 +46,10 @@ class LoginController extends Controller
             return view('dashboard');
         }
 
-        return redirect('/')->with('error', 'Login Gagal!');
+        // Menampilkan SweetAlert
+        Alert::error('Maaf!', 'Login Gagal!, Silahkan Coba Lagi Beberapa Saat Lagi!');
+
+        return redirect('/');
     }
 
     function logout()

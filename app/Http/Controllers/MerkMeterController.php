@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\MerkMeter;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class MerkMeterController extends Controller
 {
@@ -35,7 +36,10 @@ class MerkMeterController extends Controller
 
         MerkMeter::create($validatedData);
 
-        return redirect(route('merkmeter.index'))->with('success', 'Data berhasil ditambahkan!');
+        // Menampilkan SweetAlert
+        Alert::success('Berhasil!', 'Data Merk Meter Berhasil Ditambahkan!');
+
+        return redirect(route('merkmeter.index'));
 
     }
 
@@ -69,7 +73,10 @@ class MerkMeterController extends Controller
         ]);
         $merks->update($validatedData);
 
-        return redirect(route('merkmeter.index'))->with('success', 'Data berhasil diubah!');
+        // Menampilkan SweetAlert
+        Alert::success('Berhasil!', 'Data Merk Meter Berhasil Diubah!');
+
+        return redirect(route('merkmeter.index'));
     }
 
     /**
@@ -79,6 +86,8 @@ class MerkMeterController extends Controller
     {
         $merk = MerkMeter::findOrFail($id);
         $merk->delete();
-        return redirect(route('merkmeter.index'))->with('success', 'Berhasil menghapus merk!');
+        // Menampilkan SweetAlert
+        Alert::success('Berhasil!', 'Data Merk Meter Berhasil Dihapus!');
+        return redirect(route('merkmeter.index'));
     }
 }

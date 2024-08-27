@@ -67,6 +67,10 @@
             </div>
         </div>
     </section>
+
+    {{-- Alert --}}
+    @include('sweetalert::alert')
+    
 </body>
 
 </html>

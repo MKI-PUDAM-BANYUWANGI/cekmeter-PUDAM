@@ -25,6 +25,8 @@
 
     <!-- Icon -->
     <link rel="shortcut icon" href="{{ asset('../assets/logo-cekmeter.png') }}">
+    <!-- CDN SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 
@@ -86,7 +88,8 @@
                         @csrf
                     </form>
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-danger" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                    <a class="btn btn-danger" href="#"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                 </div>
             </div>
         </div>
@@ -113,6 +116,31 @@
     <script src="{{ asset('../templates/js/demo/chart-pie-demo.js') }}"></script>
     <!-- Page level custom tables -->
     <script src="{{ asset('../templates/js/demo/datatables-demo.js') }}"></script>
+
+    {{-- Alert --}}
+    @include('sweetalert::alert')
+
+    {{-- Script Konfirmasi Hapus Data --}}
+    <script>
+        function confirmDelete(id) {
+            console.log(id);
+        Swal.fire({
+            title: 'Apakah Anda Yakin?',
+            text: "Data ini akan dihapus secara permanen!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Hapus!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Submit form delete
+                document.getElementById('delete-form-' + id).submit();
+            }
+        })
+    }
+    </script>
 
 </body>
 

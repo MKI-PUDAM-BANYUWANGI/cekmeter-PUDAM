@@ -8,6 +8,8 @@ use App\Http\Requests\UpdatePelangganRequest;
 use App\Models\MerkMeter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class PelangganController extends Controller
 {
@@ -59,8 +61,11 @@ class PelangganController extends Controller
         // Membuat data pelanggan
         Pelanggan::create($pelangganData);
 
+        // Menampilkan SweetAlert
+        Alert::success('Berhasil!', 'Data Pelanggan Berhasil Ditambahkan!');
+
         // Redirect ke halaman index dengan pesan sukses
-        return redirect()->route('pelanggan.index')->with('success', 'Data berhasil disimpan!');
+        return redirect()->route('pelanggan.index');
     }
 
     /**
@@ -113,7 +118,10 @@ class PelangganController extends Controller
 
         $pelanggan->update($pelangganData);
 
-        return redirect()->route('pelanggan.index')->with('success', 'Data berhasil diperbarui!');
+        // Menampilkan SweetAlert
+        Alert::success('Berhasil!', 'Data Pelanggan Berhasil Diperbarui!');
+
+        return redirect()->route('pelanggan.index');
     }
 
 
@@ -123,6 +131,9 @@ class PelangganController extends Controller
     public function destroy(Pelanggan $pelanggan)
     {
         $pelanggan->delete();
-        return redirect()->route('pelanggan.index')->with('success', 'Data Berhasil Dihapus!');
+        // Menampilkan SweetAlert
+        Alert::success('Berhasil!', 'Data Pelanggan Berhasil Dihapus!');
+
+        return redirect()->route('pelanggan.index');
     }
 }
