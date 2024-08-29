@@ -12,10 +12,11 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
+    <li class="nav-item @if(Request::is('dashboard')) active @endif">
         <a class="nav-link" href="/dashboard">
             <i class="fas fa-fw fa-home"></i>
-            <span>Beranda</span></a>
+            <span>Beranda</span>
+        </a>
     </li>
 
     <!-- Divider -->
@@ -27,24 +28,27 @@
     </div>
 
     <!-- Nav Item - Data Pelanggan -->
-    <li class="nav-item">
+    <li class="nav-item @if(Route::is('pelanggan.index')) active @endif">
         <a class="nav-link" href="{{ route('pelanggan.index') }}">
             <i class="fas fa-fw fa-users"></i>
-            <span>Pelanggan</span></a>
+            <span>Pelanggan</span>
+        </a>
     </li>
 
     <!-- Nav Item - Data Merk Meter -->
-    <li class="nav-item">
+    <li class="nav-item @if(Route::is('merkmeter.index')) active @endif">
         <a class="nav-link" href="{{ route('merkmeter.index') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Merk Meter</span></a>
+            <span>Merk Meter</span>
+        </a>
     </li>
 
     <!-- Nav Item - Data Staff -->
-    <li class="nav-item">
+    <li class="nav-item @if(Route::is('staff.index')) active @endif">
         <a class="nav-link" href="{{ route('staff.index') }}">
             <i class="fas fa-fw fa-user"></i>
-            <span>Staff/User</span></a>
+            <span>Staff/User</span>
+        </a>
     </li>
 
     <!-- Divider -->
