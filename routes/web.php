@@ -5,6 +5,7 @@ use App\Http\Controllers\MerkMeterController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\LogDataController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\Auth;
@@ -39,6 +40,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('dashboard', [LoginController::class, 'dashboard'])->name('dashboard');
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index']);
+    // Log Data
+    Route::resource('/dashboard/logdata', LogDataController::class);
     // Pelanggan
     Route::resource('/dashboard/pelanggan', PelangganController::class);
     // Merk Meter

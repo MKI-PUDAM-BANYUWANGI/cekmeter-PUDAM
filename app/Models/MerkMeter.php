@@ -18,4 +18,9 @@ class MerkMeter extends Model
     {
         return 'id';
     }
+
+    public function logData()
+    {
+        return $this->hasMany(LogData::class, 'merk_meter_id');
+    }
 }

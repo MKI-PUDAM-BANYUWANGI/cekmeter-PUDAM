@@ -62,33 +62,6 @@
                         <option>06 - Tegaldlimo</option>
                     </select>
                 </div>
-                {{-- <div class="form-group">
-                    <label for="merk_meter_id">Merk Meter</label>
-                    <select class="form-control" id="merk_meter_id" name="merk_meter_id">
-                        <option value="">Pilih Merk Meter</option>
-                        @foreach($merkmeter as $meter)
-                        <option value="{{ $meter->id }}">{{ $meter->nama_merk }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="kondisi_meter">Kondisi Meter</label>
-                    <select id="kondisi_meter" name="kondisi_meter" class="form-control">
-                        <option selected>Pilih Kondisi Meter</option>
-                        <option value="Sangat Baik">Sangat Baik</option>
-                        <option value="Baik">Baik</option>
-                        <option value="Buruk">Buruk</option>
-                        <option value="Sangat Buruk">Sangat Buruk</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="tanggal_cek">Tanggal Cek</label>
-                    <input type="date" class="form-control" id="tanggal_cek" name="tanggal_cek">
-                </div>
-                <div class="form-group">
-                    <label for="foto_meter">Foto Meter</label>
-                    <input type="file" class="form-control" id="foto_meter" name="foto_meter">
-                </div> --}}
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Simpan Data</button>
                     <button type="reset" class="btn btn-danger">Reset Data</button>

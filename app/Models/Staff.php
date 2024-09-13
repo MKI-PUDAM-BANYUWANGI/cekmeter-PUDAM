@@ -12,7 +12,6 @@ class Staff extends Model
     protected $table = 'staffs';
 
     protected $fillable = [
-        'id',
         'nip',
         'nama_staff',
         'no_telepon',
@@ -22,4 +21,9 @@ class Staff extends Model
     protected $hidden = [
         'password',
     ];
+
+    public function logData()
+    {
+        return $this->hasMany(LogData::class, 'petugas_id');
+    }
 }

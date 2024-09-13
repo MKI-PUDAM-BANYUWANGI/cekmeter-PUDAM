@@ -1,14 +1,14 @@
 @extends('layout.dashboard-layout')
 
-@section('title','Admin Dashboard - Data Pelanggan')
+@section('title','Admin Dashboard - Log Data')
 
 @section('main-content')
 <div class="container-fluid">
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Data Pelanggan PUDAM Banyuwangi</h1>
-        <a href="{{ route('pelanggan.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+        <h1 class="h3 mb-0 text-gray-800">Log Data Cek Meter PUDAM Banyuwangi</h1>
+        <a href="{{ route('logdata.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                 class="fas fa-plus fa-sm text-white-50"></i> Tambah Data <i></i></a>
     </div>
 
@@ -25,31 +25,44 @@
                     <thead class="text-center">
                         <tr>
                             <th>No</th>
-                            <th>Nomor SP</th>
-                            <th>Nama</th>
-                            <th>Alamat</th>
-                            <th>Wilayah</th>
+                            <th>ID Petugas</th>
+                            <th>No. SP Pelanggan</th>
+                            <th>Merk Meter</th>
+                            <th>Kondisi Meter</th>
+                            <th>Tanggal Cek</th>
+                            <th>Foto Meter</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($pelanggan as $index => $object)
+                        @foreach ($logdata as $index => $object)
                         <tr class="text-center">
                             <td>{{ $index + 1 }}</td>
-                            <td>{{ $object -> no_sp }}</td>
-                            <td>{{ $object -> nama_pelanggan }}</td>
-                            <td>{{ $object -> alamat }}</td>
-                            <td>{{ $object -> wilayah }}</td>
+                            <td>{{ $object->petugas->nip ?? 'NIP Tidak Ditemukan' }}</td>
+                            <td>{{ $object->pelanggan->no_sp ?? 'No. SP Tidak Ditemukan' }}</td>
+                            <td>{{ $object->merkMeter->nama_merk ?? 'Belum Ada Merk' }}</td>
+                            <td>{{ $object->kondisi_meter ?? 'Belum Ada' }}</td>
+                            <td>{{ $object->tanggal_cek ?? 'Belum Dicek' }}</td>
+                            <td>
+                                @if ($object->foto_meter)
+                                <img src="{{ asset('storage/' . $object->foto_meter) }}" alt="Foto Meter"
+                                    style="max-width: 50px;">
+                                @else
+                                Tidak ada foto
+                                @endif
+                            </td>
                             <td>
                                 <!-- Update Button -->
-                                <a href="{{ route('pelanggan.edit', $object->id)}}" class="btn btn-info"><i
+                                <a href="{{ route('logdata.edit', $object->id)}}" class="btn btn-info"><i
                                         class="fas fa-edit"></i></a>
                                 <!-- Delete Button -->
-                                <form id="delete-form-{{ $object->id }}" action="{{route('pelanggan.destroy', $object->id)}}" method="POST" class="d-inline">
+                                <form id="delete-form-{{ $object->id }}"
+                                    action="{{route('logdata.destroy', $object->id)}}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
                                     <!-- Perbaikan tombol delete -->
-                                    <button type="button" class="btn btn-danger" onclick="confirmDelete({{ $object->id }})">
+                                    <button type="button" class="btn btn-danger"
+                                        onclick="confirmDelete({{ $object->id }})">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </form>

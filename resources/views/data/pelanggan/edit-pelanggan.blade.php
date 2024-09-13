@@ -62,36 +62,6 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="merk_meter_id">Merk Meter</label>
-                    <select class="form-control" id="merk_meter_id" name="merk_meter_id">
-                        <option value="">Pilih Merk Meter</option>
-                        @foreach($merkmeter as $meter)
-                            <option value="{{ $meter->id }}" {{ $meter->id == $pelanggan->merk_meter_id ? 'selected' : '' }}>{{ $meter->nama_merk }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="kondisi_meter">Kondisi Meter</label>
-                    <select id="kondisi_meter" name="kondisi_meter" class="form-control">
-                        <option value="">Kondisi Meter</option>
-                        <option value="Sangat Baik" {{ old('kondisi_meter', $pelanggan->kondisi_meter) == 'Sangat Baik' ? 'selected' : '' }}>Sangat Baik</option>
-                        <option value="Baik" {{ old('kondisi_meter', $pelanggan->kondisi_meter) == 'Baik' ? 'selected' : '' }}>Baik</option>
-                        <option value="Buruk" {{ old('kondisi_meter', $pelanggan->kondisi_meter) == 'Buruk' ? 'selected' : '' }}>Buruk</option>
-                        <option value="Sangat Buruk" {{ old('kondisi_meter', $pelanggan->kondisi_meter) == 'Sangat Buruk' ? 'selected' : '' }}>Sangat Buruk</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="tanggal_cek">Tanggal Cek</label>
-                    <input type="date" class="form-control" id="tanggal_cek" name="tanggal_cek" value="{{ $pelanggan->tanggal_cek }}">
-                </div>
-                <div class="form-group">
-                    <label for="foto_meter">Foto Meter</label>
-                    <input type="file" class="form-control" id="foto_meter" name="foto_meter">
-                    @if ($pelanggan->foto_meter)
-                        <img src="{{ asset('storage/' . $pelanggan->foto_meter) }}" alt="Foto Meter" style="max-width: 100px; margin-top: 10px;">
-                    @endif
-                </div>
-                <div class="form-group">
                     <button type="submit" class="btn btn-primary">Simpan Data</button>
                     <button type="reset" class="btn btn-danger">Reset Data</button>
                 </div>

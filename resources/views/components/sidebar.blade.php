@@ -27,6 +27,14 @@
         Data
     </div>
 
+    <!-- Nav Item - Log Data -->
+    <li class="nav-item @if(Route::is('logdata.index')) active @endif">
+        <a class="nav-link" href="{{ route('logdata.index') }}">
+            <i class="fas fa-fw fa-database"></i>
+            <span>Log Data</span>
+        </a>
+    </li>
+
     <!-- Nav Item - Data Pelanggan -->
     <li class="nav-item @if(Route::is('pelanggan.index')) active @endif">
         <a class="nav-link" href="{{ route('pelanggan.index') }}">

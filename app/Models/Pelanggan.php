@@ -13,22 +13,17 @@ class Pelanggan extends Model
     protected $table = 'pelanggans';
 
     protected $fillable = [
-        'id',
         'no_sp',
         'nama_pelanggan',
         'alamat',
         'wilayah',
-        'foto_meter',
-        'merk_meter_id',
-        'kondisi_meter',
-        'tanggal_cek'
     ];
 
     protected $hidden = [];
 
-    public function merkMeter()
+    public function logData()
     {
-        return $this->belongsTo(MerkMeter::class, 'merk_meter_id');
+        return $this->hasMany(LogData::class, 'pelanggan_id');
     }
 
     // /**
