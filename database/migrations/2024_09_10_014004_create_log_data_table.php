@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('merk_meter_id');
             $table->string('foto_meter');
             $table->string('kondisi_meter');
-            $table->date('tanggal_cek');
+            $table->string('ket_kondisi')->nullable();
+            $table->datetime('tanggal_cek');
             $table->timestamps();
         });
     }

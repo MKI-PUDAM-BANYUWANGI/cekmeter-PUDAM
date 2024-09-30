@@ -65,17 +65,18 @@
                 </div>
                 <div class="form-group">
                     <label for="kondisi_meter">Kondisi Meter</label>
-                    <select id="kondisi_meter" name="kondisi_meter" class="form-control">
-                        <option selected>Pilih Kondisi Meter</option>
-                        <option value="Sangat Baik">Sangat Baik</option>
-                        <option value="Baik">Baik</option>
-                        <option value="Buruk">Buruk</option>
-                        <option value="Sangat Buruk">Sangat Buruk</option>
-                    </select>
+                    <div>
+                        <input type="radio" id="baik" name="kondisi_meter" value="Baik">
+                        <label for="baik">Baik</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="rusak" name="kondisi_meter" value="Rusak">
+                        <label for="rusak">Rusak</label>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label for="tanggal_cek">Tanggal Cek</label>
-                    <input type="date" class="form-control" id="tanggal_cek" name="tanggal_cek">
+                    <label for="ket_kondisi">Keterangan Kondisi Merk Meter <span>(Opsional)</span></label>
+                    <textarea name="ket_kondisi" id="ket_kondisi" class="form-control" rows="3" placeholder="Masukan Keterangan Kondisi Merk Meter"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="foto_meter">Foto Meter</label>

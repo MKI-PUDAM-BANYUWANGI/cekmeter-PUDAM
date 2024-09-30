@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('merk_meters', function (Blueprint $table) {
             $table->id();
             $table->string('nama_merk');
+            $table->string('deskripsi')->nullable();
             $table->timestamps();
         });
     }

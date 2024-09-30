@@ -17,6 +17,7 @@ class LogData extends Model
         'merk_meter_id',
         'foto_meter',
         'kondisi_meter',
+        'ket_kondisi',
         'tanggal_cek'
     ];
 
@@ -26,7 +27,7 @@ class LogData extends Model
     {
         return $this->belongsTo(Staff::class, 'petugas_id');
     }
-    
+
     public function pelanggan()
     {
         return $this->belongsTo(Pelanggan::class, 'pelanggan_id');

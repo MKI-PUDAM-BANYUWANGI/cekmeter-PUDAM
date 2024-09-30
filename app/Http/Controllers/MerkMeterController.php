@@ -31,7 +31,8 @@ class MerkMeterController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'nama_merk' => 'required|min:3'
+            'nama_merk' => 'required|min:3',
+            'deskripsi' => 'nullable'
         ]);
 
         MerkMeter::create($validatedData);
@@ -69,7 +70,8 @@ class MerkMeterController extends Controller
     {
         $merks = MerkMeter::findOrFail($id);
         $validatedData = $request->validate([
-        'nama_merk' => 'required|string|max:255',
+            'nama_merk' => 'required|string|max:255',
+            'deskripsi' => 'nullable'
         ]);
         $merks->update($validatedData);
 

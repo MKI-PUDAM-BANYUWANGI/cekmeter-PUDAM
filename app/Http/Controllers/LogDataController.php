@@ -49,7 +49,7 @@ class LogDataController extends Controller
             'pelanggan_id' => 'required',
             'merk_meter_id' => 'required',
             'kondisi_meter' => 'required',
-            'tanggal_cek' => 'required|date',
+            'ket_kondisi' => 'nullable',
             'foto_meter' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120'
         ]);
 
@@ -58,20 +58,22 @@ class LogDataController extends Controller
 
         // Jika ada file yang diunggah
         if ($request->hasFile('foto_meter')) {
-            // Menyimpan file dan mendapatkan path-nya
             $filePath = $request->file('foto_meter')->store('logdata', 'public');
             $logData['foto_meter'] = $filePath;
         }
 
-        // Membuat data pelanggan
+        // Set tanggal_cek otomatis ke waktu saat ini
+        $logData['tanggal_cek'] = \Carbon\Carbon::now()->setTimezone('Asia/Jakarta');
+
+        // Membuat data log
         LogData::create($logData);
 
         // Menampilkan SweetAlert
         Alert::success('Berhasil!', 'Log Data Berhasil Ditambahkan!');
 
-        // Redirect ke halaman index dengan pesan sukses
         return redirect()->route('logdata.index');
     }
+
 
     /**
      * Display the specified resource.
@@ -103,7 +105,7 @@ class LogDataController extends Controller
             'pelanggan_id' => 'required',
             'merk_meter_id' => 'required',
             'kondisi_meter' => 'required',
-            'tanggal_cek' => 'required|date',
+            'ket_kondisi' => 'nullable',
             'foto_meter' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120'
         ]);
 
@@ -111,16 +113,20 @@ class LogDataController extends Controller
         $logData = $request->except('foto_meter');
 
         if ($request->hasFile('foto_meter')) {
-            // Delete old file if exists
+            // Hapus foto lama
             if ($logdata->foto_meter && Storage::exists($logdata->foto_meter)) {
                 Storage::delete($logdata->foto_meter);
             }
 
-            // Store new file and get its path
+            // Simpan foto baru
             $filePath = $request->file('foto_meter')->store('logdata', 'public');
             $logData['foto_meter'] = $filePath;
         }
 
+        // Update tanggal_cek otomatis ke waktu saat ini
+        $logData['tanggal_cek'] = \Carbon\Carbon::now()->setTimezone('Asia/Jakarta');
+
+        // Update data
         $logdata->update($logData);
 
         // Menampilkan SweetAlert
@@ -128,6 +134,7 @@ class LogDataController extends Controller
 
         return redirect()->route('logdata.index');
     }
+
 
 
     /**

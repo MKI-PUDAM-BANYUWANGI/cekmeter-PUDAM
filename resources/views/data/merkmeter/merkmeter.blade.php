@@ -28,6 +28,7 @@
                         <tr>
                             <th>No</th>
                             <th>Nama Merk</th>
+                            <th>Deskripsi</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -36,6 +37,7 @@
                         <tr class="text-center">
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $merk->nama_merk }}</td>
+                            <td>{{ $merk->deskripsi ?? 'Tidak Ada Deskripsi dari Merk Meter Ini' }}</td>
                             <td>
                                 <!-- Update Button -->
                                 <a href="{{ route('merkmeter.edit', $merk->id) }}" class="btn btn-info"><i

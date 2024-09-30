@@ -5,7 +5,10 @@
         <div class="sidebar-brand-icon">
             <img src="{{ asset('../assets/logo-cekmeter.png') }}" alt="cek-meter" width="100%">
         </div>
-        <div class="sidebar-brand-text mx-3">Admin Dashboard</div>
+        <div class="sidebar-brand-text mt-3">
+            <h3 style="font-size: 15px; margin-bottom: 0; font-weight: bold;">Cek Meter</h3>
+            <p style="font-size: 12px; margin-top: 0;">PUDAM Banyuwangi</p>
+        </div>
     </a>
 
     <!-- Divider -->

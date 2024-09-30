@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\MerkMeter;
+use App\Models\Staff;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,7 +17,9 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UsersSeeder::class,
-            PelangganSeeder::class
+            PelangganSeeder::class,
+            MerkMeterSeeder::class,
+            StaffSeeder::class,
         ]);
     }
 }

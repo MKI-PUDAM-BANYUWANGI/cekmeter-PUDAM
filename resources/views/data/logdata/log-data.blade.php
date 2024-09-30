@@ -27,10 +27,12 @@
                             <th>No</th>
                             <th>ID Petugas</th>
                             <th>No. SP Pelanggan</th>
+                            <th>Nama Pelanggan</th>
                             <th>Merk Meter</th>
                             <th>Kondisi Meter</th>
-                            <th>Tanggal Cek</th>
+                            <th>Keterangan Kondisi</th>
                             <th>Foto Meter</th>
+                            <th>Tanggal Cek</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -40,9 +42,10 @@
                             <td>{{ $index + 1 }}</td>
                             <td>{{ $object->petugas->nip ?? 'NIP Tidak Ditemukan' }}</td>
                             <td>{{ $object->pelanggan->no_sp ?? 'No. SP Tidak Ditemukan' }}</td>
+                            <td>{{ $object->pelanggan->nama_pelanggan ?? 'Tidak Ada Pelanggan Ditemukan' }}</td>
                             <td>{{ $object->merkMeter->nama_merk ?? 'Belum Ada Merk' }}</td>
                             <td>{{ $object->kondisi_meter ?? 'Belum Ada' }}</td>
-                            <td>{{ $object->tanggal_cek ?? 'Belum Dicek' }}</td>
+                            <td>{{ $object->ket_kondisi ?? 'Tidak Ada Keterangan' }}</td>
                             <td>
                                 @if ($object->foto_meter)
                                 <img src="{{ asset('storage/' . $object->foto_meter) }}" alt="Foto Meter"
@@ -51,6 +54,7 @@
                                 Tidak ada foto
                                 @endif
                             </td>
+                            <td>{{ $object->tanggal_cek ?? 'Belum Dicek' }}</td>
                             <td>
                                 <!-- Update Button -->
                                 <a href="{{ route('logdata.edit', $object->id)}}" class="btn btn-info"><i
