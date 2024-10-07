@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pelanggan;
+use App\Models\Wilayah;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -15,7 +16,8 @@ class PelangganController extends Controller
     public function index()
     {
         $pelanggan = Pelanggan::all();
-        return view('data.pelanggan.pelanggan', compact('pelanggan'));
+        $wilayah = Wilayah::all();
+        return view('data.pelanggan.pelanggan', compact('pelanggan', 'wilayah'));
     }
 
     /**
@@ -31,22 +33,39 @@ class PelangganController extends Controller
      */
     public function store(Request $request)
     {
-        // Validasi data
-        $validatedData = $request->validate([
-            'no_sp' => 'required',
-            'nama_pelanggan' => 'required',
-            'alamat' => 'required',
-            'wilayah' => 'required|not_in:Pilih Wilayah',
+        // Validasi input
+        $request->validate([
+            'kode_wilayah' => 'required|string|size:2',  // Harus 2 karakter
+            'no_sp_lain' => 'required|string|max:255',
+            'nama_pelanggan' => 'required|string|max:255',
+            'alamat' => 'required|string',
         ]);
 
-        // Membuat data pelanggan
-        Pelanggan::create($validatedData);
+        // Gabungkan kode wilayah dan nomor SP lain
+        $no_sp = $request->kode_wilayah . $request->no_sp_lain;
+
+        // Cari wilayah berdasarkan kode_wilayah
+        $wilayah = Wilayah::where('kode_wilayah', $request->kode_wilayah)->first();
+
+        if ($wilayah) {
+            // Simpan data pelanggan
+            Pelanggan::create([
+                'no_sp' => $no_sp,
+                'nama_pelanggan' => $request->nama_pelanggan,
+                'alamat' => $request->alamat,
+                'wilayah_id' => $wilayah->id,  // Simpan wilayah_id berdasarkan kode_wilayah yang ditemukan
+            ]);
+
+            // Menampilkan SweetAlert
+            Alert::success('Berhasil!', 'Data Pelanggan Berhasil Ditambahkan!');
+            // Redirect ke halaman index dengan pesan sukses
+            return redirect()->route('pelanggan.index');
+        }
 
         // Menampilkan SweetAlert
-        Alert::success('Berhasil!', 'Data Pelanggan Berhasil Ditambahkan!');
-
+        Alert::info('Maaf!', 'Wilayah Tidak Ditemukan');
         // Redirect ke halaman index dengan pesan sukses
-        return redirect()->route('pelanggan.index');
+        return redirect()->route('pelanggan.create');
     }
 
     /**
@@ -71,21 +90,40 @@ class PelangganController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $pelanggan = Pelanggan::findOrFail($id);
+        // Validasi input
         $validatedData = $request->validate([
-            'no_sp' => 'required',
-            'nama_pelanggan' => 'required',
-            'alamat' => 'required',
-            'wilayah' => 'required|not_in:Pilih Wilayah',
+            'kode_wilayah' => 'required|string|size:2', // Kode wilayah harus 2 karakter
+            'no_sp_lain' => 'required|string|max:255', // Bagian nomor SP lainnya
+            'nama_pelanggan' => 'required|string|max:255',
+            'alamat' => 'required|string',
         ]);
 
-        // Update Data
-        $pelanggan->update($validatedData);
+        // Gabungkan kode wilayah dan nomor SP lainnya
+        $no_sp = $request->kode_wilayah . $request->no_sp_lain;
 
-        // Menampilkan SweetAlert
-        Alert::success('Berhasil!', 'Data Pelanggan Berhasil Diperbarui!');
+        // Cari wilayah berdasarkan kode_wilayah
+        $wilayah = Wilayah::where('kode_wilayah', $request->kode_wilayah)->first();
 
-        return redirect()->route('pelanggan.index');
+        if ($wilayah) {
+            // Temukan data pelanggan yang akan diupdate
+            $pelanggan = Pelanggan::findOrFail($id);
+
+            // Update data pelanggan
+            $pelanggan->update([
+                'no_sp' => $no_sp,
+                'nama_pelanggan' => $request->nama_pelanggan,
+                'alamat' => $request->alamat,
+                'wilayah_id' => $wilayah->id, // Update wilayah_id berdasarkan kode_wilayah yang ditemukan
+            ]);
+
+            // Menampilkan SweetAlert
+            Alert::success('Berhasil!', 'Data Pelanggan Berhasil Diperbarui!');
+            return redirect()->route('pelanggan.index');
+        }
+
+        // Menampilkan SweetAlert jika wilayah tidak ditemukan
+        Alert::info('Maaf!', 'Wilayah Tidak Ditemukan');
+        return redirect()->back();
     }
 
 

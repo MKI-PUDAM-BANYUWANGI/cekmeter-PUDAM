@@ -37,33 +37,51 @@
             <form action="{{ route('pelanggan.update', $pelanggan->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
+                <!-- Menggunakan method PUT untuk update -->
                 <div class="form-group">
                     <label for="no_sp">Nomor SP</label>
-                    <input type="number" id="no_sp" name="no_sp" class="form-control" placeholder="Masukan Nomor SP" value="{{ $pelanggan->no_sp }}">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <input type="text" id="kode_wilayah" name="kode_wilayah" class="form-control"
+                                placeholder="Kode" maxlength="2" value="{{ substr($pelanggan->no_sp, 0, 2) }}"
+                                required oninput="updateNoSP()">
+                        </div>
+                        <div class="col-md-11">
+                            <input type="text" id="no_sp_lain" name="no_sp_lain" class="form-control"
+                                placeholder="Masukan Sisa Nomor SP" value="{{ substr($pelanggan->no_sp, 2) }}" required
+                                oninput="updateNoSP()">
+                        </div>
+                    </div>
+                </div>
+                <!-- Menampilkan Nomor SP Lengkap di dalam label -->
+                <div class="form-group" id="reviewSection" style="display: none;">
+                    <h6>Review</h6>
+                    <table style="border-collapse: collapse;">
+                        <tr>
+                            <td>Nomor SP Pelanggan</td>
+                            <td>:</td>
+                            <td><span id="review_no_sp"></span></td>
+                        </tr>
+                        <tr>
+                            <td>Wilayah</td>
+                            <td>:</td>
+                            <td><span id="review_wilayah"></span></td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="form-group">
-                    <label for="nama_pelanggan">Nama Pelanggan</label>
-                    <input type="text" id="nama_pelanggan" name="nama_pelanggan" class="form-control" placeholder="Masukan Nama Pelanggan" value="{{ $pelanggan->nama_pelanggan }}">
+                    <label for="nama">Nama Pelanggan</label>
+                    <input type="text" id="nama_pelanggan" name="nama_pelanggan" class="form-control"
+                        placeholder="Masukan Nama Pelanggan" value="{{ $pelanggan->nama_pelanggan }}" required>
                 </div>
                 <div class="form-group">
                     <label for="alamat">Alamat Pelanggan</label>
-                    <textarea type="text" id="alamat" name="alamat" class="form-control">{{  $pelanggan->alamat  }}</textarea>
+                    <textarea type="text" id="alamat" name="alamat" class="form-control"
+                        required>{{ $pelanggan->alamat }}</textarea>
                 </div>
                 <div class="form-group">
-                    <label for="wilayah">Wilayah</label>
-                    <select id="wilayah" name="wilayah" class="form-control">
-                        <option value="">Pilih Wilayah</option>
-                        <option value="01 - Banyuwangi" {{ old('wilayah', $pelanggan->wilayah) == '01 - Banyuwangi' ? 'selected' : '' }}>01 - Banyuwangi</option>
-                        <option value="02 - Rogojampi" {{ old('wilayah', $pelanggan->wilayah) == '02 - Rogojampi' ? 'selected' : '' }}>02 - Rogojampi</option>
-                        <option value="03 - Muncar" {{ old('wilayah', $pelanggan->wilayah) == '03 - Muncar' ? 'selected' : '' }}>03 - Muncar</option>
-                        <option value="04 - Genteng" {{ old('wilayah', $pelanggan->wilayah) == '04 - Genteng' ? 'selected' : '' }}>04 - Genteng</option>
-                        <option value="05 - Wongsorejo" {{ old('wilayah', $pelanggan->wilayah) == '05 - Wongsorejo' ? 'selected' : '' }}>05 - Wongsorejo</option>
-                        <option value="06 - Tegaldlimo" {{ old('wilayah', $pelanggan->wilayah) == '06 - Tegaldlimo' ? 'selected' : '' }}>06 - Tegaldlimo</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Simpan Data</button>
-                    <button type="reset" class="btn btn-danger">Reset Data</button>
+                    <button type="submit" class="btn btn-primary">Update Data</button>
+                    <button type="reset" class="btn btn-danger" onclick="resetNoSP()">Reset Data</button>
                 </div>
             </form>
         </div>

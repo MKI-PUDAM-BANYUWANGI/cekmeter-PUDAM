@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\LogDataController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\StaffController;
+use App\Http\Controllers\WilayahController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -53,4 +54,6 @@ Route::group(['middleware' => ['auth']], function() {
     // Ubah Password
     Route::get('/profile/ubah-password', [DashboardController::class, 'ubahpassword'])->name('ubahPassword');
     Route::post('/ubah-password', [DashboardController::class, 'changepassword'])->name('profile.ubahPassword');
+    // Get Wilayah
+    Route::get('/get-wilayah/{kode}', [WilayahController::class, 'getWilayahByKode']);
 });

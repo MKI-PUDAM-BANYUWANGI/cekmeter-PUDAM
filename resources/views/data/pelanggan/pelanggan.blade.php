@@ -36,10 +36,10 @@
                         @foreach ($pelanggan as $index => $object)
                         <tr class="text-center">
                             <td>{{ $index + 1 }}</td>
-                            <td>{{ $object -> no_sp }}</td>
-                            <td>{{ $object -> nama_pelanggan }}</td>
-                            <td>{{ $object -> alamat }}</td>
-                            <td>{{ $object -> wilayah }}</td>
+                            <td>{{ $object ->no_sp }}</td>
+                            <td>{{ $object ->nama_pelanggan }}</td>
+                            <td>{{ $object ->alamat }}</td>
+                            <td>{{ $object ->wilayah->nama_wilayah }}</td>
                             <td>
                                 <!-- Update Button -->
                                 <a href="{{ route('pelanggan.edit', $object->id)}}" class="btn btn-info"><i

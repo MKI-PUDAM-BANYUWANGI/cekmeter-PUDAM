@@ -16,25 +16,20 @@ class Pelanggan extends Model
         'no_sp',
         'nama_pelanggan',
         'alamat',
-        'wilayah',
+        'wilayah_id'
     ];
 
     protected $hidden = [];
 
+    // RElasi dengan Log Data
     public function logData()
     {
         return $this->hasMany(LogData::class, 'pelanggan_id');
     }
 
-    // /**
-    //  * image
-    //  *
-    //  * @return Attribute
-    //  */
-    // protected function image(): Attribute
-    // {
-    //     return Attribute::make(
-    //         get: fn ($image) => url('/storage/posts/' . $image),
-    //     );
-    // }
+    // Definisikan relasi dengan Wilayah
+    public function wilayah() {
+        return $this->belongsTo(Wilayah::class, 'wilayah_id', 'id');
+    }
+
 }

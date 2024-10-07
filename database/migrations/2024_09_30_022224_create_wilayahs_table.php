@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pelanggans', function (Blueprint $table) {
+        Schema::create('wilayah', function (Blueprint $table) {
             $table->id();
-            $table->string('no_sp');
-            $table->string('nama_pelanggan');
-            $table->text('alamat');
-            $table->unsignedBigInteger('wilayah_id');  // Foreign key ke tabel wilayah
+            $table->string('kode_wilayah', 2)->unique();
+            $table->string('nama_wilayah');
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pelanggans');
+        Schema::dropIfExists('wilayah');
     }
 };

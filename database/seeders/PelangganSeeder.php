@@ -16,8 +16,8 @@ class PelangganSeeder extends Seeder
         Pelanggan::create([
             'no_sp' => '01223344',
             'nama_pelanggan' => 'Ken Affila',
-            'alamat' => ('Giri'),
-            'wilayah' => ('01 - Banyuwangi')
+            'alamat' => ('Giri, Banyuwangi, Jawa Timur'),
+            'wilayah_id' => ('1')
         ]);
     }
 }

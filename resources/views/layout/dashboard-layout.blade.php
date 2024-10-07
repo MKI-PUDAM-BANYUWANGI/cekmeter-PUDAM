@@ -143,6 +143,60 @@
     }
     </script>
 
+    <!-- JavaScript untuk menampilkan Nomor SP Lengkap dan Wilayah -->
+    <script>
+        function updateNoSP() {
+        var kodeWilayah = document.getElementById('kode_wilayah').value;
+        var noSpLain = document.getElementById('no_sp_lain').value;
+
+        // Gabungkan kode wilayah dan nomor SP lainnya
+        var fullNoSp = kodeWilayah + noSpLain;
+
+        // Set nilai di span review_no_sp
+        document.getElementById('review_no_sp').textContent = fullNoSp;
+
+        // Jika kode wilayah sudah 2 digit, ambil nama wilayah
+        if (kodeWilayah.length === 2) {
+            getWilayah(kodeWilayah);
+        } else {
+            document.getElementById('review_wilayah').textContent = '';
+        }
+
+        // Tampilkan atau sembunyikan section review berdasarkan input
+        if (fullNoSp.length > 0) {
+            document.getElementById('reviewSection').style.display = 'block';
+        } else {
+            document.getElementById('reviewSection').style.display = 'none';
+        }
+    }
+
+    function getWilayah(kode) {
+        // Gunakan AJAX untuk mengambil nama wilayah berdasarkan kode wilayah
+        fetch(`/get-wilayah/${kode}`)
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Wilayah tidak ditemukan');
+                }
+            })
+            .then(data => {
+                // Tampilkan nama wilayah di span review_wilayah
+                document.getElementById('review_wilayah').textContent = data.nama_wilayah;
+            })
+            .catch(error => {
+                document.getElementById('review_wilayah').textContent = error.message;
+            });
+    }
+
+    // Reset field ketika form direset
+    function resetNoSP() {
+        document.getElementById('review_no_sp').textContent = '';
+        document.getElementById('review_wilayah').textContent = '';
+        document.getElementById('reviewSection').style.display = 'none'; // Sembunyikan review section
+    }
+    </script>
+
 </body>
 
 </html>
