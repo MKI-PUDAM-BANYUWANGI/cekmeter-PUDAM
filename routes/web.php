@@ -43,6 +43,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/dashboard', [DashboardController::class, 'index']);
     // Log Data
     Route::resource('/dashboard/logdata', LogDataController::class);
+    Route::get('/pelanggan/search', [PelangganController::class, 'search'])->name('pelanggan.search');
     // Pelanggan
     Route::resource('/dashboard/pelanggan', PelangganController::class);
     // Merk Meter

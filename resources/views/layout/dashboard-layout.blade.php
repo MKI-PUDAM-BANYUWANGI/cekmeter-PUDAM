@@ -197,6 +197,51 @@
     }
     </script>
 
+    <!-- AJAX untuk Pencarian Data Pelanggan -->
+    <script>
+        $('#cari_pelanggan').click(function () {
+        var no_sp = $('#no_sp_pelanggan').val();
+
+        // AJAX untuk mencari pelanggan berdasarkan No SP
+        $.ajax({
+            url: '{{ route('pelanggan.search') }}',
+            type: 'GET',
+            data: { no_sp: no_sp },
+            success: function (data) {
+                if (data) {
+                    // Jika pelanggan ditemukan, tampilkan data pelanggan
+                    $('#pelanggan_info').html(`
+                        <div class="alert alert-info">
+                            <strong>Pelanggan Ditemukan:</strong> <br>
+                            Nama: ${data.nama_pelanggan} <br>
+                            Alamat: ${data.alamat} <br>
+                            Wilayah: ${data.wilayah} <br>
+                        </div>
+                    `);
+                    $('#pelanggan_id').val(data.id); // Menyimpan ID pelanggan ke dalam hidden input
+                } else {
+                    // Jika pelanggan tidak ditemukan, tampilkan alert error
+                    $('#pelanggan_info').html(`
+                        <div class="alert alert-danger">
+                            Pelanggan tidak ditemukan.
+                        </div>
+                    `);
+                    $('#pelanggan_id').val(''); // Kosongkan input ID pelanggan jika tidak ditemukan
+                }
+            },
+            error: function () {
+                // Jika terjadi error dalam AJAX
+                $('#pelanggan_info').html(`
+                    <div class="alert alert-danger">
+                        Terjadi kesalahan saat mencari pelanggan. Silakan coba lagi.
+                    </div>
+                `);
+            }
+        });
+    });
+    </script>
+
+
 </body>
 
 </html>

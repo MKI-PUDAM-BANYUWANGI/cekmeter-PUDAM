@@ -138,4 +138,25 @@ class PelangganController extends Controller
 
         return redirect()->route('pelanggan.index');
     }
+
+    public function search(Request $request)
+    {
+        $no_sp = $request->get('no_sp'); // Mengambil input nomor SP dari request
+
+        // Cari pelanggan dan load relasi wilayah
+        $pelanggan = Pelanggan::with('wilayah')->where('no_sp', $no_sp)->first();
+
+        // Jika pelanggan ditemukan, kembalikan data pelanggan
+        if ($pelanggan) {
+            return response()->json([
+                'id' => $pelanggan->id,
+                'nama_pelanggan' => $pelanggan->nama_pelanggan,
+                'alamat' => $pelanggan->alamat,
+                'no_sp' => $pelanggan->no_sp,
+                'wilayah' => $pelanggan->wilayah->nama_wilayah, // akses nama wilayah dari relasi
+            ]);
+        } else {
+            return response()->json(null);
+        }
+    }
 }

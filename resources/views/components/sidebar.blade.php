@@ -58,7 +58,7 @@
     <li class="nav-item @if(Route::is('staff.index')) active @endif">
         <a class="nav-link" href="{{ route('staff.index') }}">
             <i class="fas fa-fw fa-user"></i>
-            <span>Staff/User</span>
+            <span>Data Staff</span>
         </a>
     </li>
 
