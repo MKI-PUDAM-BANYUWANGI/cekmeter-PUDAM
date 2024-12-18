@@ -40,8 +40,12 @@
                     <label for="no_sp">Nomor SP</label>
                     <div class="row">
                         <div class="col-md-1">
-                            <input type="text" id="kode_wilayah" name="kode_wilayah" class="form-control"
-                                placeholder="Kode" maxlength="2" required oninput="updateNoSP()">
+                            <select id="kode_wilayah" name="kode_wilayah" class="form-control" required onchange="updateNoSP()">
+                                <option value="" disabled selected>Pilih</option>
+                                @foreach ($wilayah as $wilayah)
+                                    <option value="{{ $wilayah['kode_wilayah'] }}">{{ $wilayah['kode_wilayah'] }} - {{ $wilayah['nama_wilayah'] }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="col-md-11">
                             <input type="text" id="no_sp_lain" name="no_sp_lain" class="form-control"
@@ -51,7 +55,7 @@
                 </div>
                 <!-- Menampilkan Review -->
                 <div class="form-group" id="reviewSection" style="display: none;">
-                    <h6>Review</h6>
+                    <h6><strong>Review</strong></h6>
                     <table style="border-collapse: collapse;">
                         <tr>
                             <td>Nomor SP Pelanggan</td>

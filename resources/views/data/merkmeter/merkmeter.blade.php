@@ -8,9 +8,9 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Data Merk Meter</h1>
-        <a href="{{ route('merkmeter.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+    <div class="d-flex flex-wrap justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Data Merk Meter - CekMeter Air PUDAM Banyuwangi</h1>
+        <a href="{{ route('merkmeter.create') }}" class="btn btn-sm btn-primary shadow-sm d-sm-inline-block d-block"><i
                 class="fas fa-plus fa-sm text-white-50"></i> Tambah Data <i></i></a>
     </div>
 

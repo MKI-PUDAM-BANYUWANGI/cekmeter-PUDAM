@@ -19,7 +19,7 @@
             @endif
         </div>
         <div class="card-body">
-            <form action="{{ route('staff.update', $staff->id) }}" method="POST">
+            <form action="{{ route('staff.update', $staff->nip) }}" method="POST">
             @csrf
             @method('PUT')
                 <div class="form-group">
@@ -35,15 +35,15 @@
                     <input type="number" class="form-control" id="notelepon" name="no_telepon" value="{{ $staff->no_telepon }}">
                 </div>
                 <div class="form-group">
-                    <label for="wilayah">Wilayah</label>
-                    <select id="wilayah" name="wilayah" class="form-control">
-                        <option value="">Pilih Wilayah</option>
-                        <option value="01 - Banyuwangi" {{ old('wilayah', $staff->wilayah) == '01 - Banyuwangi' ? 'selected' : '' }}>01 - Banyuwangi</option>
-                        <option value="02 - Rogojampi" {{ old('wilayah', $staff->wilayah) == '02 - Rogojampi' ? 'selected' : '' }}>02 - Rogojampi</option>
-                        <option value="03 - Muncar" {{ old('wilayah', $staff->wilayah) == '03 - Muncar' ? 'selected' : '' }}>03 - Muncar</option>
-                        <option value="04 - Genteng" {{ old('wilayah', $staff->wilayah) == '04 - Genteng' ? 'selected' : '' }}>04 - Genteng</option>
-                        <option value="05 - Wongsorejo" {{ old('wilayah', $staff->wilayah) == '05 - Wongsorejo' ? 'selected' : '' }}>05 - Wongsorejo</option>
-                        <option value="06 - Tegaldlimo" {{ old('wilayah', $staff->wilayah) == '06 - Tegaldlimo' ? 'selected' : '' }}>06 - Tegaldlimo</option>
+                    <label for="wilayah" class="form-label">Wilayah</label>
+                    <select id="kode_wilayah" name="kode_wilayah" class="form-control">
+                        <option value="" disabled>Pilih Wilayah</option>
+                        @foreach ($wilayah as $wilayah)
+                            <option value="{{ $wilayah['kode_wilayah'] }}"
+                                {{ $wilayah['kode_wilayah'] == $staff->kode_wilayah ? 'selected' : '' }}>
+                                {{ $wilayah['kode_wilayah'] }} - {{ $wilayah['nama_wilayah'] }}
+                            </option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="form-group">

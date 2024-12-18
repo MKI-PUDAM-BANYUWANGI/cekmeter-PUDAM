@@ -7,6 +7,8 @@ use App\Http\Requests\StoreStaffRequest;
 use App\Http\Requests\UpdateStaffRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Hash;
+use App\Models\Wilayah;
+use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 
 
@@ -17,8 +19,9 @@ class StaffController extends Controller
      */
     public function index()
     {
-         $staffs = Staff::all();
-        return view('data.staff.staff', compact('staffs'));
+        $staffs = Staff::all();
+        $wilayah = Wilayah::all();
+        return view('data.staff.staff', compact('staffs', 'wilayah'));
     }
 
     /**
@@ -26,7 +29,8 @@ class StaffController extends Controller
      */
     public function create()
     {
-        return view('data.staff.tambahstaff');
+        $wilayah = Wilayah::all();
+        return view('data.staff.tambahstaff', compact('wilayah'));
     }
 
     /**
@@ -38,7 +42,7 @@ class StaffController extends Controller
             'nip' => 'required',
             'nama_staff' => 'required',
             'no_telepon' => 'required',
-            'wilayah' => 'required',
+            'kode_wilayah' => 'required',
             'password' => 'required',
         ]);
 
@@ -46,7 +50,7 @@ class StaffController extends Controller
             'nip' => $request->nip,
             'nama_staff' => $request->nama_staff,
             'no_telepon' => $request->no_telepon,
-            'wilayah' => $request->wilayah,
+            'kode_wilayah' => $request->kode_wilayah,
             'password' => $request->password,
         ]);
 
@@ -67,30 +71,32 @@ class StaffController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Staff $staff)
+    public function edit($nip)
     {
-        return view('data.staff.editstaff', compact('staff'));
+        $staff = Staff::findOrFail($nip);
+        $wilayah = Wilayah::all();
+        return view('data.staff.editstaff', compact('staff', 'wilayah'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $nip)
     {
         $request->validate([
             'nip' => 'required',
             'nama_staff' => 'required',
             'no_telepon' => 'required',
-            'wilayah' => 'required',
+            'kode_wilayah' => 'required',
             'password' => 'required',
         ]);
 
-        $staffs = Staff::findOrFail($id);
+        $staffs = Staff::findOrFail($nip);
         $staffs->update([
             'nip' => $request->nip,
             'nama_staff' => $request->nama_staff,
             'no_telepon' => $request->no_telepon,
-            'wilayah' => $request->wilayah,
+            'kode_wilayah' => $request->kode_wilayah,
             'password' => $request->password ? ($request->password) : $staffs->password,
         ]);
 
@@ -103,9 +109,9 @@ class StaffController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy($nip)
     {
-        Staff::findOrFail($id)->delete();
+        Staff::findOrFail($nip)->delete();
         // Menampilkan SweetAlert
         Alert::success('Berhasil!', 'Data Staff berhasil dihapus!');
         return redirect()->route('staff.index');

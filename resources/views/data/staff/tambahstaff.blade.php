@@ -35,14 +35,11 @@
                 </div>
                 <div class="form-group">
                     <label for="wilayah" class="form-label">Wilayah</label>
-                    <select id="wilayah" name="wilayah" class="form-control" required>
-                        <option selected>Pilih Wilayah</option>
-                        <option>01 - Banyuwangi</option>
-                        <option>02 - Rogojampi</option>
-                        <option>03 - Muncar</option>
-                        <option>04 - Genteng</option>
-                        <option>05 - Wongsorejo</option>
-                        <option>06 - Tegaldlimo</option>
+                    <select id="kode_wilayah" name="kode_wilayah" class="form-control">
+                        <option value="" disabled selected>Pilih Wilayah</option>
+                        @foreach ($wilayah as $wilayah)
+                            <option value="{{ $wilayah['kode_wilayah'] }}">{{ $wilayah['kode_wilayah'] }} - {{ $wilayah['nama_wilayah'] }}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="form-group">

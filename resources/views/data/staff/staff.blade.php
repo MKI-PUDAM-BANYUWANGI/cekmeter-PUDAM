@@ -6,9 +6,9 @@
 
 {{-- Tabel Data User --}}
 <div class="container-fluid">
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Data Staff Petugas Lapang</h1>
-        <a href="{{ route('staff.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+    <div class="d-flex flex-wrap justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Data Petugas Lapang - CekMeter Air PUDAM Banyuwangi</h1>
+        <a href="{{ route('staff.create') }}" class="btn btn-sm btn-primary shadow-sm d-sm-inline-block d-block"><i
                 class="fas fa-plus fa-sm text-white-50"></i> Tambah Data <i></i></a>
     </div>
     <div class="card shadow mb-4">
@@ -38,17 +38,17 @@
                             <td>{{ $object->nip }}</td>
                             <td>{{ $object->nama_staff }}</td>
                             <td>{{ $object->no_telepon }}</td>
-                            <td>{{ $object->wilayah }}</td>
+                            <td>{{ $object->wilayah->nama_wilayah }}</td>
                             <td>{{ $object->password }}</td>
                             <td>
                                 <!-- Update Button -->
-                                <a href="{{ route('staff.edit', $object->id)}}" class="btn btn-info"><i
+                                <a href="{{ route('staff.edit', $object->nip)}}" class="btn btn-info"><i
                                         class="fas fa-edit"></i></a>
                                 <!-- Delete Button -->
-                                <form id="delete-form-{{ $object->id }}" action="{{route('staff.destroy', $object->id)}}" method="POST" class="d-inline">
+                                <form id="delete-form-{{ $object->nip }}" action="{{route('staff.destroy', $object->nip)}}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="button" class="btn btn-danger" onclick="confirmDelete({{ $object->id }})">
+                                    <button type="button" class="btn btn-danger" onclick="confirmDeleteStaff({{ $object->nip }})">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </form>

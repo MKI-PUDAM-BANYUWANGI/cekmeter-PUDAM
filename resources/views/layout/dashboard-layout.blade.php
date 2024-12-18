@@ -121,10 +121,10 @@
     {{-- Alert --}}
     @include('sweetalert::alert')
 
-    {{-- Script Konfirmasi Hapus Data --}}
+    {{-- Script Konfirmasi Hapus Data Pelanggan --}}
     <script>
-        function confirmDelete(id) {
-            console.log(id);
+        function confirmDelete(no_sp) {
+            console.log(no_sp);
         Swal.fire({
             title: 'Apakah Anda Yakin?',
             text: "Data ini akan dihapus secara permanen!",
@@ -137,7 +137,29 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 // Submit form delete
-                document.getElementById('delete-form-' + id).submit();
+                document.getElementById('delete-form-' + encodeURIComponent(no_sp)).submit();
+            }
+        })
+    }
+    </script>
+
+    {{-- Script Konfirmasi Hapus Data Staff --}}
+    <script>
+        function confirmDeleteStaff(nip) {
+            console.log(nip);
+        Swal.fire({
+            title: 'Apakah Anda Yakin?',
+            text: "Data ini akan dihapus secara permanen!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Hapus!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Submit form delete
+                document.getElementById('delete-form-' + encodeURIComponent(nip)).submit();
             }
         })
     }
@@ -218,7 +240,7 @@
                             Wilayah: ${data.wilayah} <br>
                         </div>
                     `);
-                    $('#pelanggan_id').val(data.id); // Menyimpan ID pelanggan ke dalam hidden input
+                    $('#pelanggan_id').val(data.no_sp); // Menyimpan ID pelanggan ke dalam hidden input
                 } else {
                     // Jika pelanggan tidak ditemukan, tampilkan alert error
                     $('#pelanggan_info').html(`

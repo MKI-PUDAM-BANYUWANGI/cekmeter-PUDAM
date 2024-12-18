@@ -25,7 +25,8 @@ class PelangganController extends Controller
      */
     public function create()
     {
-        return view('data.pelanggan.tambah-pelanggan');
+        $wilayah = Wilayah::all();
+        return view('data.pelanggan.tambah-pelanggan', compact('wilayah'));
     }
 
     /**
@@ -53,7 +54,7 @@ class PelangganController extends Controller
                 'no_sp' => $no_sp,
                 'nama_pelanggan' => $request->nama_pelanggan,
                 'alamat' => $request->alamat,
-                'wilayah_id' => $wilayah->id,  // Simpan wilayah_id berdasarkan kode_wilayah yang ditemukan
+                'kode_wilayah' => $wilayah->kode_wilayah,  // Simpan wilayah berdasarkan kode_wilayah yang ditemukan
             ]);
 
             // Menampilkan SweetAlert
@@ -68,6 +69,7 @@ class PelangganController extends Controller
         return redirect()->route('pelanggan.create');
     }
 
+
     /**
      * Display the specified resource.
      */
@@ -79,16 +81,17 @@ class PelangganController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit($no_sp)
     {
-        $pelanggan = Pelanggan::findOrFail($id);
-        return view('data.pelanggan.edit-pelanggan', compact('pelanggan'));
+        $pelanggan = Pelanggan::findOrFail($no_sp); // Cari berdasarkan no_sp
+        $wilayah = Wilayah::all();
+        return view('data.pelanggan.edit-pelanggan', compact('pelanggan', 'wilayah'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $no_sp)
     {
         // Validasi input
         $validatedData = $request->validate([
@@ -99,21 +102,21 @@ class PelangganController extends Controller
         ]);
 
         // Gabungkan kode wilayah dan nomor SP lainnya
-        $no_sp = $request->kode_wilayah . $request->no_sp_lain;
+        $new_no_sp = $request->kode_wilayah . $request->no_sp_lain;
 
         // Cari wilayah berdasarkan kode_wilayah
         $wilayah = Wilayah::where('kode_wilayah', $request->kode_wilayah)->first();
 
         if ($wilayah) {
             // Temukan data pelanggan yang akan diupdate
-            $pelanggan = Pelanggan::findOrFail($id);
+            $pelanggan = Pelanggan::findOrFail($no_sp);
 
             // Update data pelanggan
             $pelanggan->update([
-                'no_sp' => $no_sp,
+                'no_sp' => $new_no_sp,
                 'nama_pelanggan' => $request->nama_pelanggan,
                 'alamat' => $request->alamat,
-                'wilayah_id' => $wilayah->id, // Update wilayah_id berdasarkan kode_wilayah yang ditemukan
+                'kode_wilayah' => $wilayah->kode_wilayah, // Update wilayah berdasarkan kode_wilayah yang ditemukan
             ]);
 
             // Menampilkan SweetAlert
@@ -130,33 +133,33 @@ class PelangganController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pelanggan $pelanggan)
+    public function destroy($no_sp)
     {
+        $pelanggan = Pelanggan::findOrFail($no_sp); // Cari berdasarkan no_sp
         $pelanggan->delete();
+
         // Menampilkan SweetAlert
         Alert::success('Berhasil!', 'Data Pelanggan Berhasil Dihapus!');
-
         return redirect()->route('pelanggan.index');
     }
 
+    // Search
     public function search(Request $request)
     {
-        $no_sp = $request->get('no_sp'); // Mengambil input nomor SP dari request
+        $no_sp = $request->input('no_sp');
+        $pelanggan = Pelanggan::with('wilayah') // Mengambil data relasi wilayah
+        ->where('no_sp', $no_sp)
+        ->first();
 
-        // Cari pelanggan dan load relasi wilayah
-        $pelanggan = Pelanggan::with('wilayah')->where('no_sp', $no_sp)->first();
-
-        // Jika pelanggan ditemukan, kembalikan data pelanggan
         if ($pelanggan) {
             return response()->json([
-                'id' => $pelanggan->id,
                 'nama_pelanggan' => $pelanggan->nama_pelanggan,
                 'alamat' => $pelanggan->alamat,
-                'no_sp' => $pelanggan->no_sp,
-                'wilayah' => $pelanggan->wilayah->nama_wilayah, // akses nama wilayah dari relasi
+                'wilayah' => $pelanggan->wilayah->nama_wilayah ?? 'Tidak Diketahui',
+                'no_sp' => $pelanggan->no_sp
             ]);
         } else {
-            return response()->json(null);
+            return response()->json(null, 404); // Jika pelanggan tidak ditemukan
         }
     }
 }
