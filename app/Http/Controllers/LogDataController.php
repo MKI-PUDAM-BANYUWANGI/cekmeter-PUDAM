@@ -18,13 +18,24 @@ class LogDataController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $logdata = LogData::all();
         $pelanggan = Pelanggan::all();
         $merkmeter = MerkMeter::all();
         $staff = Staff::all();
-        return view('data.logdata.log-data', compact('logdata', 'pelanggan', 'merkmeter', 'staff'));
+
+        // Ambil filter tanggal mulai dan tanggal akhir dari request
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        // Query filtering
+        $logdata = LogData::when($startDate && $endDate, function ($query) use ($startDate, $endDate) {
+                return $query->whereBetween('tanggal_cek', [$startDate, $endDate]);
+            })
+            ->orderBy('tanggal_cek', 'desc') // Urutkan berdasarkan tanggal cek terbaru
+            ->get();
+
+        return view('data.logdata.log-data', compact('logdata', 'pelanggan', 'merkmeter', 'staff', 'startDate', 'endDate'));
     }
 
     /**
@@ -45,8 +56,8 @@ class LogDataController extends Controller
     {
         // Validasi data
         $this->validate($request, [
-            'petugas_id' => 'required',
-            'pelanggan_id' => 'required',
+            'petugas_id' => 'required|exists:staffs,nip',
+            'no_sp' => 'required|exists:pelanggans,no_sp',
             'merk_meter_id' => 'required',
             'kondisi_meter' => 'required',
             'ket_kondisi' => 'nullable',
@@ -55,6 +66,12 @@ class LogDataController extends Controller
 
         // Mengambil semua data request kecuali 'foto_meter'
         $logData = $request->except('foto_meter');
+
+        // Data petugas_id berisi nip
+        $logData['petugas_id'] = $request->input('petugas_id');
+
+        // Data no_sp tetap valid
+        $logData['no_sp'] = $request->input('no_sp');
 
         // Jika ada file yang diunggah
         if ($request->hasFile('foto_meter')) {
@@ -101,8 +118,8 @@ class LogDataController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'petugas_id' => 'required',
-            'pelanggan_id' => 'required',
+            'petugas_id' => 'required|exists:staffs,nip',
+            'no_sp' => 'required|exists:pelanggans,no_sp',
             'merk_meter_id' => 'required',
             'kondisi_meter' => 'required',
             'ket_kondisi' => 'nullable',
@@ -111,6 +128,12 @@ class LogDataController extends Controller
 
         $logdata = LogData::findOrFail($id);
         $logData = $request->except('foto_meter');
+
+        // Data petugas_id berisi nip
+        $logData['petugas_id'] = $request->input('petugas_id');
+
+        // Data no_sp tetap valid
+        $logData['no_sp'] = $request->input('no_sp');
 
         if ($request->hasFile('foto_meter')) {
             // Hapus foto lama
@@ -134,8 +157,6 @@ class LogDataController extends Controller
 
         return redirect()->route('logdata.index');
     }
-
-
 
     /**
      * Remove the specified resource from storage.

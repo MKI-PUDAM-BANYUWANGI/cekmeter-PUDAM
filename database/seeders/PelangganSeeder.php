@@ -17,7 +17,7 @@ class PelangganSeeder extends Seeder
             'no_sp' => '01223344',
             'nama_pelanggan' => 'Ken Affila',
             'alamat' => ('Giri, Banyuwangi, Jawa Timur'),
-            'wilayah_id' => ('1')
+            'kode_wilayah' => ('01')
         ]);
     }
 }

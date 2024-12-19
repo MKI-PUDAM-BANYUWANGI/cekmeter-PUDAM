@@ -37,23 +37,28 @@
             <form action="{{ route('logdata.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
-                    <label for="petugas_id">ID Petugas</label>
+                    <label for="petugas_id">NIP Petugas</label>
                     <select class="form-control" id="petugas_id" name="petugas_id">
-                        <option value="">Pilih ID</option>
+                        <option value="">Pilih Petugas</option>
                         @foreach($staff as $petugas)
-                        <option value="{{ $petugas->id }}">{{ $petugas->nip }} - {{ $petugas->nama_staff }}</option>
+                        <option value="{{ $petugas->nip }}">{{ $petugas->nip }} - {{ $petugas->nama_staff }}</option>
                         @endforeach
                     </select>
                 </div>
+                <!-- Input Nomor SP Pelanggan dengan tombol Cari -->
                 <div class="form-group">
-                    <label for="pelanggan_id">No SP Pelanggan</label>
-                    <select class="form-control" id="pelanggan_id" name="pelanggan_id">
-                        <option value="">No SP Pelanggan</option>
-                        @foreach($pelanggan as $pelanggans)
-                        <option value="{{ $pelanggans->id }}">{{ $pelanggans->no_sp }} - {{ $pelanggans->nama_pelanggan }}</option>
-                        @endforeach
-                    </select>
+                    <label for="no_sp_pelanggan">No SP Pelanggan</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="no_sp_pelanggan" name="no_sp_pelanggan" placeholder="Masukkan No SP Pelanggan">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button" id="cari_pelanggan">Cari</button>
+                        </div>
+                    </div>
+                    <input type="hidden" id="pelanggan_id" name="no_sp">
                 </div>
+                <!-- Display Data Pelanggan yang Ditemukan -->
+                <div id="pelanggan_info" class="mt-3"></div>
+                <!-- End Display Data Pelanggan yang Ditemukan -->
                 <div class="form-group">
                     <label for="merk_meter_id">Merk Meter</label>
                     <select class="form-control" id="merk_meter_id" name="merk_meter_id">
@@ -80,7 +85,7 @@
                 </div>
                 <div class="form-group">
                     <label for="foto_meter">Foto Meter</label>
-                    <input type="file" class="form-control" id="foto_meter" name="foto_meter">
+                    <input type="file" class="form-control" id="foto_meter" name="foto_meter" accept="image/*" capture="environment">
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Simpan Data</button>

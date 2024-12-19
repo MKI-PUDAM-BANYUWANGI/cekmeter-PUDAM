@@ -18,7 +18,7 @@ class StaffSeeder extends Seeder
             'nip' => '1234567890',
             'nama_staff' => 'Rio Adjie',
             'no_telepon' => '081234567890',
-            'wilayah' => '01 - Banyuwangi',
+            'kode_wilayah' => '01',
             'password' => 'password',
         ]);
     }

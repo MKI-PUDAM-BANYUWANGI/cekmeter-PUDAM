@@ -16,7 +16,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item @if(Request::is('dashboard')) active @endif">
-        <a class="nav-link" href="/dashboard">
+        <a class="nav-link" href="{{ route('dashboard.index') }}">
             <i class="fas fa-fw fa-home"></i>
             <span>Beranda</span>
         </a>
@@ -58,7 +58,7 @@
     <li class="nav-item @if(Route::is('staff.index')) active @endif">
         <a class="nav-link" href="{{ route('staff.index') }}">
             <i class="fas fa-fw fa-user"></i>
-            <span>Staff/User</span>
+            <span>Petugas Lapang</span>
         </a>
     </li>
 
