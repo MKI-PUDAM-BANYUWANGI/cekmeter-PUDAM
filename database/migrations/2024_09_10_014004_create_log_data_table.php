@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('ket_kondisi')->nullable();
             $table->datetime('tanggal_cek');
             $table->timestamps();
-            $table->foreign('petugas_id')->references('nip')->on('staffs');
+            $table->foreign('petugas_id')->references('nip')->on('staff');
             $table->foreign('no_sp')->references('no_sp')->on('pelanggans');
         });
     }

@@ -9,7 +9,7 @@ class Staff extends Model
 {
     use HasFactory;
 
-    protected $table = 'staffs';
+    protected $table = 'staff';
 
     // Atur Primary Key ke nip
     protected $primaryKey = 'nip';

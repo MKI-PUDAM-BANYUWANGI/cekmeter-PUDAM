@@ -3,157 +3,139 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-//import Resource "PelangganResource"
-use App\Http\Resources\PelangganResource;
-//import Model "Pelanggan"
 use App\Models\Pelanggan;
-//import Facade "Validator"
-use Illuminate\Support\Facades\Validator;
-//import Facade "Storage"
-use Illuminate\Support\Facades\Storage;
+use App\Models\Wilayah;
+use Illuminate\Http\Request;
 
 class PelangganController extends Controller
 {
     /**
-     * index
-     *
-     * @return void
+     * Display a listing of the resource.
      */
     public function index()
     {
-        //get all posts
-        $pelanggan = Pelanggan::latest()->paginate(5);
-
-        //return collection of posts as a resource
-        return new PelangganResource(true, 'List Data Pelanggan', $pelanggan);
+        $pelanggan = Pelanggan::with('wilayah')->get();
+        return response()->json($pelanggan, 200);
     }
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        // Validasi data
-        $validator = Validator::make($request->all(), [
-            'no_sp' => 'required',
-            'nama_pelanggan' => 'required',
-            'alamat' => 'required',
-            'wilayah' => 'required|not_in:Pilih Wilayah',
-            'merk_meter_id' => 'nullable|exists:merk_meters,id',
-            'kondisi_meter' => 'nullable',
-            'tanggal_cek' => 'nullable|date',
-            'foto_meter' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120'
+        // Validasi input
+        $request->validate([
+            'kode_wilayah' => 'required|string|size:2',
+            'no_sp_lain' => 'required|string|max:255',
+            'nama_pelanggan' => 'required|string|max:255',
+            'alamat' => 'required|string',
         ]);
 
-        //check if validation fails
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+        $no_sp = $request->kode_wilayah . $request->no_sp_lain;
+
+        // Cari wilayah berdasarkan kode_wilayah
+        $wilayah = Wilayah::where('kode_wilayah', $request->kode_wilayah)->first();
+
+        if (!$wilayah) {
+            return response()->json(['message' => 'Wilayah Tidak Ditemukan'], 404);
         }
 
-        // Mengambil semua data request kecuali 'foto_meter'
-        $pelangganData = $request->except('foto_meter');
-
-        // Jika ada file yang diunggah
-        if ($request->hasFile('foto_meter')) {
-            // Menyimpan file dan mendapatkan path-nya
-            $filePath = $request->file('foto_meter')->store('pelanggan', 'public');
-            $pelangganData['foto_meter'] = $filePath;
-        }
-
-        //create pelanggan
-        $pelanggan = Pelanggan::create($pelangganData);
-
-        //return response
-        return new PelangganResource(true, 'Data Pelanggan Berhasil Ditambahkan!', $pelanggan);
-    }
-
-    /**
-     * show
-     *
-     * @param  mixed $post
-     * @return void
-     */
-    public function show($id)
-    {
-        //find post by ID
-        $pelanggan = Pelanggan::find($id);
-
-        //return single pelanggan as a resource
-        return new PelangganResource(true, 'Detail Data Pelanggan!', $pelanggan);
-    }
-
-    /**
-     * Update the specified Pelanggan in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function update(Request $request, $id)
-    {
-        // Define validation rules
-        $validator = Validator::make($request->all(), [
-            'no_sp' => 'required',
-            'nama_pelanggan' => 'required',
-            'alamat' => 'required',
-            'wilayah' => 'required',
-            'merk_meter_id' => 'nullable|exists:merk_meters,id',
-            'kondisi_meter' => 'nullable',
-            'tanggal_cek' => 'nullable|date',
-            'foto_meter' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120'
+        // Simpan data pelanggan
+        $pelanggan = Pelanggan::create([
+            'no_sp' => $no_sp,
+            'nama_pelanggan' => $request->nama_pelanggan,
+            'alamat' => $request->alamat,
+            'kode_wilayah' => $wilayah->kode_wilayah,
         ]);
 
-        // Check if validation fails
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
-        }
-
-        // Find Pelanggan by ID
-        $pelanggan = Pelanggan::findOrFail($id);
-        $pelangganData = $request->except('foto_meter');
-
-        if ($request->hasFile('foto_meter')) {
-            // Delete old file if exists
-            if ($pelanggan->foto_meter && Storage::disk('public')->exists($pelanggan->foto_meter)) {
-                Storage::disk('public')->delete($pelanggan->foto_meter);
-            }
-
-            // Store new file and get its path
-            $filePath = $request->file('foto_meter')->store('pelanggan', 'public');
-            $pelangganData['foto_meter'] = $filePath;
-        }
-
-        // Update Pelanggan with new data
-        $pelanggan->update($pelangganData);
-
-        // Return response
-        return new PelangganResource(true, 'Data Pelanggan Berhasil Diubah!', $pelanggan);
+        return response()->json(['message' => 'Data Pelanggan Berhasil Ditambahkan', 'data' => $pelanggan], 201);
     }
 
     /**
-     * Remove the specified Pelanggan from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
+     * Display the specified resource.
      */
-    public function destroy($id)
+    public function show($no_sp)
     {
-        // Find Pelanggan by ID
-        $pelanggan = Pelanggan::findOrFail($id);
+        $pelanggan = Pelanggan::with('wilayah')->where('no_sp', $no_sp)->first();
 
-        // If there is a file associated with this pelanggan, delete it
-        if ($pelanggan->foto_meter && Storage::disk('public')->exists($pelanggan->foto_meter)) {
-            Storage::disk('public')->delete($pelanggan->foto_meter);
+        if (!$pelanggan) {
+            return response()->json(['message' => 'Pelanggan Tidak Ditemukan'], 404);
         }
 
-        // Delete Pelanggan
+        return response()->json($pelanggan, 200);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, $no_sp)
+    {
+        // Validasi input
+        $request->validate([
+            'kode_wilayah' => 'required|string|size:2',
+            'no_sp_lain' => 'required|string|max:255',
+            'nama_pelanggan' => 'required|string|max:255',
+            'alamat' => 'required|string',
+        ]);
+
+        $pelanggan = Pelanggan::where('no_sp', $no_sp)->first();
+
+        if (!$pelanggan) {
+            return response()->json(['message' => 'Pelanggan Tidak Ditemukan'], 404);
+        }
+
+        $new_no_sp = $request->kode_wilayah . $request->no_sp_lain;
+        $wilayah = Wilayah::where('kode_wilayah', $request->kode_wilayah)->first();
+
+        if (!$wilayah) {
+            return response()->json(['message' => 'Wilayah Tidak Ditemukan'], 404);
+        }
+
+        // Update data pelanggan
+        $pelanggan->update([
+            'no_sp' => $new_no_sp,
+            'nama_pelanggan' => $request->nama_pelanggan,
+            'alamat' => $request->alamat,
+            'kode_wilayah' => $wilayah->kode_wilayah,
+        ]);
+
+        return response()->json(['message' => 'Data Pelanggan Berhasil Diperbarui', 'data' => $pelanggan], 200);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy($no_sp)
+    {
+        $pelanggan = Pelanggan::where('no_sp', $no_sp)->first();
+
+        if (!$pelanggan) {
+            return response()->json(['message' => 'Pelanggan Tidak Ditemukan'], 404);
+        }
+
         $pelanggan->delete();
+        return response()->json(['message' => 'Data Pelanggan Berhasil Dihapus'], 200);
+    }
 
-        // Return response
-        return new PelangganResource(true, 'Data Pelanggan Berhasil Dihapus!', null);
+    /**
+     * Search pelanggan by no_sp.
+     */
+    public function search(Request $request)
+    {
+        $no_sp = $request->input('no_sp');
+        $pelanggan = Pelanggan::with('wilayah')
+            ->where('no_sp', $no_sp)
+            ->first();
+
+        if ($pelanggan) {
+            return response()->json([
+                'nama_pelanggan' => $pelanggan->nama_pelanggan,
+                'alamat' => $pelanggan->alamat,
+                'wilayah' => $pelanggan->wilayah->nama_wilayah ?? 'Tidak Diketahui',
+                'no_sp' => $pelanggan->no_sp
+            ]);
+        } else {
+            return response()->json(null, 404);
+        }
     }
 }
