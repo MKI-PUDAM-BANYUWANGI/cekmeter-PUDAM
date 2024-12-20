@@ -3,118 +3,116 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-//import Resource "MerkMeter"
-use App\Http\Resources\MerkMeterResource;
-//import Model "Merk Meter"
 use App\Models\MerkMeter;
-//import Facade "Validator"
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 
 class MerkMeterController extends Controller
 {
     /**
-     * index
-     *
-     * @return void
+     * Display a listing of the resource.
      */
     public function index()
     {
-        //get all posts
-        $merkmeter = MerkMeter::latest()->paginate(5);
+        $merks = MerkMeter::all();
 
-        //return collection of posts as a resource
-        return new MerkMeterResource(true, 'List Data Merk Meter', $merkmeter);
+        return response()->json([
+            'success' => true,
+            'message' => 'Data Merk Meter berhasil diambil',
+            'data' => $merks
+        ], 200);
     }
 
     /**
-     * Store a newly created MerkMeter in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\JsonResponse
+     * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        // Validasi data
-        $validator = Validator::make($request->all(), [
-            'nama_merk' => 'required|min:3'
+        // Validasi input
+        $validatedData = $request->validate([
+            'nama_merk' => 'required|min:3',
+            'deskripsi' => 'nullable|string'
         ]);
 
-        // Cek apakah validasi gagal
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
-        }
+        // Simpan data
+        $merk = MerkMeter::create($validatedData);
 
-        // Membuat merk meter baru dengan data yang valid
-        $merkmeter = MerkMeter::create([
-            'nama_merk' => $request->nama_merk
-        ]);
-
-        // Mengembalikan respon
-        return new MerkMeterResource(true, 'Data Merk Meter Berhasil Ditambahkan!', $merkmeter);
+        return response()->json([
+            'success' => true,
+            'message' => 'Data Merk Meter berhasil ditambahkan',
+            'data' => $merk
+        ], 201);
     }
 
     /**
-     * show
-     *
-     * @param  mixed $post
-     * @return void
+     * Display the specified resource.
      */
     public function show($id)
     {
-        //find post by ID
-        $merkmeter = MerkMeter::find($id);
+        $merk = MerkMeter::find($id);
 
-        //return single merkmeter as a resource
-        return new MerkMeterResource(true, 'Detail Data Merk Meter!', $merkmeter);
+        if (!$merk) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data Merk Meter tidak ditemukan'
+            ], 404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data Merk Meter berhasil diambil',
+            'data' => $merk
+        ], 200);
     }
 
     /**
-     * Update the specified Merk Meter in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
+     * Update the specified resource in storage.
      */
     public function update(Request $request, $id)
     {
-        // Define validation rules
-        $validator = Validator::make($request->all(), [
-            'nama_merk' => 'required|min:3'
-        ]);
+        $merk = MerkMeter::find($id);
 
-        // Check if validation fails
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+        if (!$merk) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data Merk Meter tidak ditemukan'
+            ], 404);
         }
 
-        // Find Merk Meter by ID
-        $merkmeter = MerkMeter::findOrFail($id);
-
-        // Update Merk Meter with new data
-        $merkmeter->update([
-            'nama_merk'     => $request->nama_merk,
+        // Validasi input
+        $validatedData = $request->validate([
+            'nama_merk' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string'
         ]);
 
-        // Return response
-        return new MerkMeterResource(true, 'Data Merk Meter Berhasil Diubah!', $merkmeter);
+        // Update data
+        $merk->update($validatedData);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data Merk Meter berhasil diupdate',
+            'data' => $merk
+        ], 200);
     }
 
     /**
-     * Remove the specified Merk Meter from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
+     * Remove the specified resource from storage.
      */
     public function destroy($id)
     {
-        // Find Merk Meter by ID
-        $merkmeter = MerkMeter::findOrFail($id);
+        $merk = MerkMeter::find($id);
 
-        // Delete Merk Meter
-        $merkmeter->delete();
+        if (!$merk) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data Merk Meter tidak ditemukan'
+            ], 404);
+        }
 
-        // Return response
-        return new MerkMeterResource(true, 'Data Merk Meter Berhasil Dihapus!', null);
+        $merk->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data Merk Meter berhasil dihapus'
+        ], 200);
     }
 }
