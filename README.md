@@ -91,12 +91,31 @@ Link URL : http://127.0.0.1:8000/api/auth/{endpoint}
 
 | No | Method | Endpoint                    | Body (JSON)                          | Keterangan                         |
 |----|--------|------------------------|-------------------------------------|------------------------------------|
-| User Login        |
+| User Login                           |                                     |                                           |
 | 1  | POST    | `/login`| `{"email": "email", "password": "password"}`| Masukan Email dan Password untuk Login maka akan diberikan data dan token        |
-| Data Merk Meter        |
-| 1  | GET    | `/api/merkmeters`      |                                     | Ambil semua data merk meter        |
-| 2  | POST   | `/api/merkmeters`      | `{ "nama_merk": "Merk A", "deskripsi": "" }` | Tambah data baru merk meter        |
-| 3  | GET    | `/api/merkmeters/{id}` |                                     | Ambil detail data merk meter by ID |
-| 4  | PUT    | `/api/merkmeters/{id}` | `{ "nama_merk": "Merk B", "deskripsi": "" }` | Update data merk meter by ID       |
-| 5  | DELETE | `/api/merkmeters/{id}` |                                     | Hapus data merk meter by ID        |
+| Data Pelanggan                           | Menggunakan Bearer Token Untuk dapat diakses |                                           |
+| 1  | GET    | `/pelanggan`      |                                     | Ambil semua data Pelanggan        |
+| 2  | POST   | `/pelanggan`      | `{"kode_wilayah": "kode", "no_sp_lain": "nomor", "nama_pelanggan": "nama", "alamat": "alamat"}` | Tambah data baru Pelanggan        |
+| 3  | GET    | `/pelanggan/{no_sp}` |                                     | Ambil detail data Pelanggan berdasarkan no_sp pelanggan |
+| 4  | PUT    | `/pelanggan/{no_sp}` | headers: Content-Type & Accept : application/json `{"kode_wilayah": "kode", "no_sp_lain": "nomor sp", "nama_pelanggan": "ubah nama", "alamat": "ubah alamat"}` | Update data berdasarkan no_sp pelanggan |
+| 5  | POST    | `/pelanggan/search` | `{"no_sp": "nomor sp"}` | Cari data pelanggan |
+| 6  | DELETE | `/pelanggan/{no_sp}` |                                     | Hapus data data Pelanggan berdasarkan no_sp        |
+| Data Merk Meter        | Menggunakan Bearer Token Untuk dapat diakses |                                           |
+| 1  | GET    | `/merk-meter`      |                                     | Ambil semua data merk meter        |
+| 2  | POST   | `/merk-meter`      | `{ "nama_merk": "Merk A", "deskripsi": "" }` | Tambah data baru merk meter        |
+| 3  | GET    | `/merk-meter/{id}` |                                     | Ambil detail data merk meter by ID |
+| 4  | PUT    | `/merk-meter/{id}` | `{ "nama_merk": "Merk B", "deskripsi": "" }` | Update data merk meter by ID       |
+| 5  | DELETE | `/merk-meter/{id}` |                                     | Hapus data merk meter by ID        |
+| Data Petugas Lapangan        | Menggunakan Bearer Token Untuk dapat diakses |                                           |
+| 1  | GET    | `/staff`      |                                     | Ambil semua data merk meter        |
+| 2  | POST   | `/staff`      | `{ "nama_merk": "Merk A", "deskripsi": "" }` | Tambah data baru merk meter        |
+| 3  | GET    | `/staff/{nip}` |                                     | Ambil detail data merk meter by ID |
+| 4  | PUT    | `/staff/{nip}` | `{ "nama_merk": "Merk B", "deskripsi": "" }` | Update data merk meter by ID       |
+| 5  | DELETE | `/staff/{nip}` |                                     | Hapus data merk meter by ID        |
+| Log Data        | Menggunakan Bearer Token Untuk dapat diakses |                                           |
+| 1  | GET    | `/log-data`      |                                     | Ambil semua data merk meter        |
+| 2  | POST   | `/log-data`      | `{ "nama_merk": "Merk A", "deskripsi": "" }` | Tambah data baru merk meter        |
+| 3  | GET    | `/log-data/{id}` |                                     | Ambil detail data merk meter by ID |
+| 4  | PUT    | `/log-data/{id}` | `{ "nama_merk": "Merk B", "deskripsi": "" }` | Update data merk meter by ID       |
+| 5  | DELETE | `/log-data/{id}` |                                     | Hapus data merk meter by ID        |
 
