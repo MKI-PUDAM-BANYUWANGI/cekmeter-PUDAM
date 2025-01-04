@@ -1,6 +1,7 @@
 <p align="center"> 
-  <img width="500" alt="logo_trashify (1)" src="https://github.com/pbl-persero-batam/pbl-manrisk-perserobatam/assets/92602362/6a2dd02f-fb0d-4921-b74d-8f1daf63beca">
+  <img width="500" alt="logo CekMeter" src="https://github.com/user-attachments/assets/eaf67e50-c8d0-4ada-8099-4267b6819b45">
 </p>
+
 
 # Pembimbing Lapangan : Sirojam Munir, SE. 
 # Dosen Pembimbing    : Eka Mistiko Rini, S.Kom., M.Kom
@@ -61,11 +62,10 @@
 
 # 📲 Fitur
 1. **Login**
-   <p align="center"><img alt="login" src="https://github.com/pbl-persero-batam/pbl-manrisk-perserobatam/assets/92602362/8c4b9d5a-2f6d-4068-ab55-195c591650f6"></p><br>
-   <p align="center"><img alt="register" src="https://github.com/pbl-persero-batam/pbl-manrisk-perserobatam/assets/92602362/71ea16ce-b1b8-4d65-ba76-1497202e587b"></p><br>
+   <p align="center"><img alt="login" src="https://github.com/user-attachments/assets/62b6c7f4-58cc-465e-b998-c7df2c91aae9"></p><br>
 
 2. **Dashboard**
-   <p align="center"><img alt="dashboard" src="https://github.com/pbl-persero-batam/pbl-manrisk-perserobatam/assets/92602362/a9884a68-4023-48ce-862e-698865e34614"></p><br>
+   <p align="center"><img alt="dashboard" src="https://github.com/user-attachments/assets/6112829a-80c1-4f9d-aba8-977dc41491bd"></p><br>
 
 3. **Menu Log Data**
    <p align="center"><img alt="dashboard" src="https://github.com/pbl-persero-batam/pbl-manrisk-perserobatam/assets/92602362/a9884a68-4023-48ce-862e-698865e34614"></p><br>
@@ -97,7 +97,7 @@ Link URL : http://127.0.0.1:8000/api/auth/{endpoint}
 | 1  | GET    | `/pelanggan`      |                                     | Ambil semua data Pelanggan        |
 | 2  | POST   | `/pelanggan`      | `{"kode_wilayah": "kode", "no_sp_lain": "nomor", "nama_pelanggan": "nama", "alamat": "alamat"}` | Tambah data baru Pelanggan        |
 | 3  | GET    | `/pelanggan/{no_sp}` |                                     | Ambil detail data Pelanggan berdasarkan no_sp pelanggan |
-| 4  | PUT    | `/pelanggan/{no_sp}` | headers: Content-Type & Accept : application/json `{"kode_wilayah": "kode", "no_sp_lain": "nomor sp", "nama_pelanggan": "ubah nama", "alamat": "ubah alamat"}` | Update data berdasarkan no_sp pelanggan |
+| 4  | PUT    | `/pelanggan/{no_sp}` | `{"kode_wilayah": "kode", "no_sp_lain": "nomor sp", "nama_pelanggan": "ubah nama", "alamat": "ubah alamat"}` | Update data berdasarkan no_sp pelanggan |
 | 5  | POST    | `/pelanggan/search` | `{"no_sp": "nomor sp"}` | Cari data pelanggan |
 | 6  | DELETE | `/pelanggan/{no_sp}` |                                     | Hapus data data Pelanggan berdasarkan no_sp        |
 | Data Merk Meter        | Menggunakan Bearer Token Untuk dapat diakses |                                           |
@@ -107,15 +107,15 @@ Link URL : http://127.0.0.1:8000/api/auth/{endpoint}
 | 4  | PUT    | `/merk-meter/{id}` | `{ "nama_merk": "Merk B", "deskripsi": "" }` | Update data merk meter by ID       |
 | 5  | DELETE | `/merk-meter/{id}` |                                     | Hapus data merk meter by ID        |
 | Data Petugas Lapangan        | Menggunakan Bearer Token Untuk dapat diakses |                                           |
-| 1  | GET    | `/staff`      |                                     | Ambil semua data merk meter        |
-| 2  | POST   | `/staff`      | `{ "nama_merk": "Merk A", "deskripsi": "" }` | Tambah data baru merk meter        |
-| 3  | GET    | `/staff/{nip}` |                                     | Ambil detail data merk meter by ID |
-| 4  | PUT    | `/staff/{nip}` | `{ "nama_merk": "Merk B", "deskripsi": "" }` | Update data merk meter by ID       |
-| 5  | DELETE | `/staff/{nip}` |                                     | Hapus data merk meter by ID        |
+| 1  | GET    | `/staff`      |                                     | Ambil semua data petugas        |
+| 2  | POST   | `/staff`      | `{"nip" : "nip A", "nama_staff" : "nama A", "no_telepon" : "no telp", "kode_wilayah" : "kode", "password" : "password"}` | Tambah data baru petugas        |
+| 3  | GET    | `/staff/{nip}` |                                     | Ambil detail data petugas berdasarkan nip |
+| 4  | PUT    | `/staff/{nip}` | `{"nip" : "nip B", "nama_staff" : "nama B", "no_telepon" : "no telp B", "kode_wilayah" : "kode", "password" : "password B"}` | Update data petugas berdasarkan nip       |
+| 5  | DELETE | `/staff/{nip}` |                                     | Hapus data petugas berdasarkan nip        |
 | Log Data        | Menggunakan Bearer Token Untuk dapat diakses |                                           |
-| 1  | GET    | `/log-data`      |                                     | Ambil semua data merk meter        |
-| 2  | POST   | `/log-data`      | `{ "nama_merk": "Merk A", "deskripsi": "" }` | Tambah data baru merk meter        |
-| 3  | GET    | `/log-data/{id}` |                                     | Ambil detail data merk meter by ID |
-| 4  | PUT    | `/log-data/{id}` | `{ "nama_merk": "Merk B", "deskripsi": "" }` | Update data merk meter by ID       |
-| 5  | DELETE | `/log-data/{id}` |                                     | Hapus data merk meter by ID        |
+| 1  | GET    | `/log-data`      |                                     | Ambil semua log data (riwayat cek meter air)        |
+| 2  | POST   | `/log-data`      | `{"petugas_id" : "nip A", "no_sp" : "no_sp A", "merk_meter_id" : "merk meter A", "kondisi_meter" : "kondisi A", "ket_kondisi" : "", "foto_meter" : "input A"}` | Tambah log data baru        |
+| 3  | GET    | `/log-data/{id}` |                                     | Ambil detail log data by ID |
+| 4  | PUT    | `/log-data/{id}` | `{"petugas_id" : "nip B", "no_sp" : "no_sp B", "merk_meter_id" : "merk meter B", "kondisi_meter" : "kondisi B", "ket_kondisi" : "", "foto_meter" : "input B"}` | Update log data by ID       |
+| 5  | DELETE | `/log-data/{id}` |                                     | Hapus log data by ID        |
 
