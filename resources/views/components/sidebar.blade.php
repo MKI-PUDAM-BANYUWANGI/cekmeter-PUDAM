@@ -18,7 +18,7 @@
     <li class="nav-item @if(Request::is('dashboard')) active @endif">
         <a class="nav-link" href="{{ route('dashboard.index') }}">
             <i class="fas fa-fw fa-home"></i>
-            <span>Beranda</span>
+            <span>Dashboard</span>
         </a>
     </li>
 
@@ -27,7 +27,7 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">
-        Data
+        Menu
     </div>
 
     <!-- Nav Item - Log Data -->

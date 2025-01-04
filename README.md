@@ -1,66 +1,102 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+<p align="center"> 
+  <img width="500" alt="logo_trashify (1)" src="https://github.com/pbl-persero-batam/pbl-manrisk-perserobatam/assets/92602362/6a2dd02f-fb0d-4921-b74d-8f1daf63beca">
 </p>
 
-## About Laravel
+# Pembimbing Lapangan : Sirojam Munir, SE. 
+# Dosen Pembimbing    : Eka Mistiko Rini, S.Kom., M.Kom
+# TIM MKI
+1. 362155401078 - Wahyu Eka Saputra
+2. 362155401085 - Rio Adjie Wiguna
+3. 362155401092 - Ken Affila Syach Maulana
+<br><br>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+#  💻 Tentang Aplikasi CekMeter Air PUDAM Banyuwangi berbasis Web
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+<p align="center"> 
+  <img width="500" alt="trashify" src="https://github.com/pbl-persero-batam/pbl-manrisk-perserobatam/assets/92602362/25f75634-e217-48e1-8a60-09cd9eb86e09">
+</p
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+**📝 Gambaran Umum Aplikasi 📸**
+<br>
+<p align="center"><img alt="desain umum" src="https://github.com/pbl-persero-batam/pbl-manrisk-perserobatam/assets/92602362/2adec1e8-4b36-421a-967c-ab257e126af6"></p><br>
+1. Admin: Admin menggunakan komputer untuk mengelola data-data yang dibutuhkan dan data tersebut akan disimpan dalam database. Data yang dikelola oleh admin meliputi data pelanggan, data petugas lapangan, data merk meter air dan log data (riwayat cek meter air pelanggan).
+2. Database: Database berfungsi sebagai pusat penyimpanan semua data yang dibutuhkan. Data ini dapat diakses dan dikelola oleh admin.
+3. Petugas Lapangan (Staff Baca Meter): Petugas lapangan mengunjungi rumah pelanggan untuk melakukan pengecekan meteran air.
+4. Aplikasi CekMerk Meter Air (di perangkat mobile): Petugas lapangan menggunakan aplikasi "CekMerk Meter Air" untuk mengecek nomor sp pelanggan lalu mengisi form yang dibutuhkan meliputi merk meter air, foto meter air, kondisi meter air, keterangan kondisi meter air lalu submit maka data akan dikirim ke server dan disimpan dalam database.
+5. Interaksi Aplikasi dengan Database: Data yang disubmit oleh petugas lapangan akan disimpan di database. Informasi ini kemudian dapat diakses kembali oleh admin melalui komputer untuk keperluan monitoring dan pelaporan pada perusahaan.
 
-## Learning Laravel
+<br>
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+**🖥️ Spesifikasi Aplikasi**
+<p align="center"><img alt="desain umum" src="https://github.com/pbl-persero-batam/pbl-manrisk-perserobatam/assets/92602362/2adec1e8-4b36-421a-967c-ab257e126af6"></p><br>
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+# 📃 Cara Install Aplikasi dengan Framework Laravel
 
-## Laravel Sponsors
+## ▶️ Spesifikasi Laravel
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- PHP ^10.x.x
+- PHP Composer
+- Database MySQL
+- Sweet Allert
 
-### Premium Partners
+## ▶️ Instalasi Aplikasi
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+1. Clone atau download source code di Github
+   - Melalui Terminal, clone repository `git clone https://github.com/MKI-PUDAM-BANYUWANGI/cekmeter-PUDAM.git`
+   - Jika tidak menggunakan terminal dapat **Download Zip** dan _extract_ ke direktori web server (example: xampp/htdocs)
+2. `cd cekmeter-PUDAM`
+3. `composer install`
+4. `cp .env.example .env`
+   - Jika tidak menggunakan GIT,  rename file `.env.example` ke `.env`
+5. Dari terminal `php artisan key:generate`
+6. Create **database from mysql** untuk aplikasi web ini
+7. **Setting database** dari file `.env`
+8. `php artisan migrate`
+9. `php artisan db:seed`
+10. Install Sweet Allert agar dapat digunakan dengan ketik di terminal `composer require realrashid/sweet-alert`
+10. Jalankan `php artisan serve` untuk memulai web
+11. Instalasi Selesai
+<br>
 
-## Contributing
+# 📲 Fitur
+1. **Login**
+   <p align="center"><img alt="login" src="https://github.com/pbl-persero-batam/pbl-manrisk-perserobatam/assets/92602362/8c4b9d5a-2f6d-4068-ab55-195c591650f6"></p><br>
+   <p align="center"><img alt="register" src="https://github.com/pbl-persero-batam/pbl-manrisk-perserobatam/assets/92602362/71ea16ce-b1b8-4d65-ba76-1497202e587b"></p><br>
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+2. **Dashboard**
+   <p align="center"><img alt="dashboard" src="https://github.com/pbl-persero-batam/pbl-manrisk-perserobatam/assets/92602362/a9884a68-4023-48ce-862e-698865e34614"></p><br>
 
-## Code of Conduct
+3. **Menu Log Data**
+   <p align="center"><img alt="dashboard" src="https://github.com/pbl-persero-batam/pbl-manrisk-perserobatam/assets/92602362/a9884a68-4023-48ce-862e-698865e34614"></p><br>
+   
+4. **Menu Pelanggan**
+   <p align="center"><img alt="dashboard" src="https://github.com/pbl-persero-batam/pbl-manrisk-perserobatam/assets/92602362/a9884a68-4023-48ce-862e-698865e34614"></p><br>
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+5. **Menu Merk Meter**
+   <p align="center"><img alt="dashboard" src="https://github.com/pbl-persero-batam/pbl-manrisk-perserobatam/assets/92602362/a9884a68-4023-48ce-862e-698865e34614"></p><br>
 
-## Security Vulnerabilities
+6. **Menu Petugas Lapang**
+   <p align="center"><img alt="dashboard" src="https://github.com/pbl-persero-batam/pbl-manrisk-perserobatam/assets/92602362/a9884a68-4023-48ce-862e-698865e34614"></p><br>
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+7. **Menu Profil**
+   <p align="center"><img alt="dashboard" src="https://github.com/pbl-persero-batam/pbl-manrisk-perserobatam/assets/92602362/a9884a68-4023-48ce-862e-698865e34614"></p><br>
+   
+# 🪟 RestAPI
+RestApi yang dibuat meliputi data user, log data, pelanggan, merk meter, dan petugas lapangan dengan endpoint seperti pada tabel dibawah ini dan dapat diakses melalui link: 
+https://documenter.getpostman.com/view/24205913/2sAXjGbDcU#d956d835-ec33-4529-ad62-9691d484f4c8
 
-## License
+### Endpoint API
+Link URL : http://127.0.0.1:8000/api/auth/{endpoint}
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+| No | Method | Endpoint                    | Body (JSON)                          | Keterangan                         |
+|----|--------|------------------------|-------------------------------------|------------------------------------|
+| User Login        |
+| 1  | POST    | `/login`| `{"email": "email", "password": "password"}`| Masukan Email dan Password untuk Login maka akan diberikan data dan token        |
+| Data Merk Meter        |
+| 1  | GET    | `/api/merkmeters`      |                                     | Ambil semua data merk meter        |
+| 2  | POST   | `/api/merkmeters`      | `{ "nama_merk": "Merk A", "deskripsi": "" }` | Tambah data baru merk meter        |
+| 3  | GET    | `/api/merkmeters/{id}` |                                     | Ambil detail data merk meter by ID |
+| 4  | PUT    | `/api/merkmeters/{id}` | `{ "nama_merk": "Merk B", "deskripsi": "" }` | Update data merk meter by ID       |
+| 5  | DELETE | `/api/merkmeters/{id}` |                                     | Hapus data merk meter by ID        |
+
