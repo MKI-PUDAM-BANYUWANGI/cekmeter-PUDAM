@@ -1,10 +1,9 @@
 <p align="center"> 
   <img width="500" alt="logo CekMeter" src="https://github.com/user-attachments/assets/eaf67e50-c8d0-4ada-8099-4267b6819b45">
 </p>
-
-
-# Pembimbing Lapangan : Sirojam Munir, SE. 
+ 
 # Dosen Pembimbing    : Eka Mistiko Rini, S.Kom., M.Kom
+# Pembimbing Lapangan : Sirojam Munir, SE.
 # TIM MKI
 1. 362155401078 - Wahyu Eka Saputra
 2. 362155401085 - Rio Adjie Wiguna
@@ -12,13 +11,10 @@
 <br><br>
 
 #  💻 Tentang Aplikasi CekMeter Air PUDAM Banyuwangi berbasis Web
+Aplikasi CekMeter Air PUDAM Banyuwangi berbasis Web ini 
 
-<p align="center"> 
-  <img width="500" alt="trashify" src="https://github.com/pbl-persero-batam/pbl-manrisk-perserobatam/assets/92602362/25f75634-e217-48e1-8a60-09cd9eb86e09">
-</p
+## 📸 Gambaran Umum Aplikasi 
 
-**📝 Gambaran Umum Aplikasi 📸**
-<br>
 <p align="center"><img alt="desain umum" src="https://github.com/pbl-persero-batam/pbl-manrisk-perserobatam/assets/92602362/2adec1e8-4b36-421a-967c-ab257e126af6"></p><br>
 1. Admin: Admin menggunakan komputer untuk mengelola data-data yang dibutuhkan dan data tersebut akan disimpan dalam database. Data yang dikelola oleh admin meliputi data pelanggan, data petugas lapangan, data merk meter air dan log data (riwayat cek meter air pelanggan).
 2. Database: Database berfungsi sebagai pusat penyimpanan semua data yang dibutuhkan. Data ini dapat diakses dan dikelola oleh admin.
@@ -28,8 +24,9 @@
 
 <br>
 
-**🖥️ Spesifikasi Aplikasi**
+## 📝 Spesifikasi Aplikasi
 <p align="center"><img alt="desain umum" src="https://github.com/pbl-persero-batam/pbl-manrisk-perserobatam/assets/92602362/2adec1e8-4b36-421a-967c-ab257e126af6"></p><br>
+
 
 
 # 📃 Cara Install Aplikasi dengan Framework Laravel
@@ -65,22 +62,39 @@
    <p align="center"><img alt="login" src="https://github.com/user-attachments/assets/62b6c7f4-58cc-465e-b998-c7df2c91aae9"></p><br>
 
 2. **Dashboard**
-   <p align="center"><img alt="dashboard" src="https://github.com/user-attachments/assets/6112829a-80c1-4f9d-aba8-977dc41491bd"></p><br>
+   <p align="center"><img alt="dashboard" src="https://github.com/user-attachments/assets/5ca87275-3412-4f07-91c8-1a383c4bae6f"></p><br>
 
 3. **Menu Log Data**
-   <p align="center"><img alt="dashboard" src="https://github.com/pbl-persero-batam/pbl-manrisk-perserobatam/assets/92602362/a9884a68-4023-48ce-862e-698865e34614"></p><br>
+   <p align="center"><img alt="logdata" src="https://github.com/user-attachments/assets/89a120fc-0d85-4d09-a9c2-6b5a1c31e888"></p><br>
+   <strong>Halaman Tambah Log Data</strong>
+   <p align="center"><img alt="tambah logdata" src="https://github.com/user-attachments/assets/dfc6fb8a-a6da-476a-a521-ce00bb373ade"></p><br>
+   <strong>Halaman Edit Log Data</strong>
+   <p align="center"><img alt="edit logdata" src="https://github.com/user-attachments/assets/7040da98-ef7c-487f-8eb4-28e88e0a7770"></p><br>
    
 4. **Menu Pelanggan**
-   <p align="center"><img alt="dashboard" src="https://github.com/pbl-persero-batam/pbl-manrisk-perserobatam/assets/92602362/a9884a68-4023-48ce-862e-698865e34614"></p><br>
-
+   <p align="center"><img alt="pelanggan" src="https://github.com/user-attachments/assets/56799b2b-9321-4fa4-bb9c-869e2a1e5a78"></p><br>
+   <strong>Halaman Tambah Data Pelanggan</strong>
+   <p align="center"><img alt="tambah pelanggan" src="https://github.com/user-attachments/assets/4539e642-83da-449e-bf81-0dfa4ef8e79b"></p><br>
+   <strong>Halaman Edit Data Pelanggan</strong>
+   <p align="center"><img alt="edit pelanggan" src="https://github.com/user-attachments/assets/6c636633-f3ed-4458-b590-fab875dc4f4f"></p><br>
+   
 5. **Menu Merk Meter**
-   <p align="center"><img alt="dashboard" src="https://github.com/pbl-persero-batam/pbl-manrisk-perserobatam/assets/92602362/a9884a68-4023-48ce-862e-698865e34614"></p><br>
-
+   <p align="center"><img alt="merk meter" src="https://github.com/user-attachments/assets/4c8ee284-8a9c-45dd-acf3-9dc1cf9e4195"></p><br>
+   <strong>Halaman Tambah Merk Meter</strong>
+   <p align="center"><img alt="tambah merk meter" src="https://github.com/user-attachments/assets/90f8dfc5-79ef-4846-b689-24c724e0cd1e"></p><br>
+   <strong>Halaman Edit Merk Meter</strong>
+   <p align="center"><img alt="edit merk meter" src="https://github.com/user-attachments/assets/d9bae76d-8045-47e3-b77d-bde380d4517c"></p><br>
+   
 6. **Menu Petugas Lapang**
-   <p align="center"><img alt="dashboard" src="https://github.com/pbl-persero-batam/pbl-manrisk-perserobatam/assets/92602362/a9884a68-4023-48ce-862e-698865e34614"></p><br>
+   <p align="center"><img alt="petugas" src="https://github.com/user-attachments/assets/fe55f5e8-0958-42c4-b40f-ee46a53d8f10"></p><br>
+   <strong>Halaman Tambah Petugas Lapang</strong>
+   <p align="center"><img alt="tambah petugas" src="https://github.com/user-attachments/assets/ffd573c7-1192-4c77-8654-e3d8ead1a362"></p><br>
+   <strong>Halaman Edit Petugas Lapang</strong>
+   <p align="center"><img alt="edit petugas" src="https://github.com/user-attachments/assets/19c7cb89-3692-4412-ab39-d5acf2142497"></p><br>
 
 7. **Menu Profil**
-   <p align="center"><img alt="dashboard" src="https://github.com/pbl-persero-batam/pbl-manrisk-perserobatam/assets/92602362/a9884a68-4023-48ce-862e-698865e34614"></p><br>
+   <p align="center"><img alt="logdata" src="https://github.com/user-attachments/assets/16be54b9-10aa-4511-87a6-2485c889d7e7"></p>
+   <p align="center"><img alt="logdata" src="https://github.com/user-attachments/assets/93a07131-4397-4574-af4b-f04cabe5b4f1"></p><br>
    
 # 🪟 RestAPI
 RestApi yang dibuat meliputi data user, log data, pelanggan, merk meter, dan petugas lapangan dengan endpoint seperti pada tabel dibawah ini dan dapat diakses melalui link: 
