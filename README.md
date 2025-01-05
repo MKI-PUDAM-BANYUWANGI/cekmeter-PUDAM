@@ -25,7 +25,7 @@ Aplikasi CekMeter Air PUDAM Banyuwangi berbasis Web ini dibuat untuk membantu pe
 
 <br>
 
-## 📝 Spesifikasi Aplikasi
+## 📝 Rancang Aplikasi
 **Use Case Diagram**
 <p align="center"><img alt="use case" src="https://github.com/user-attachments/assets/aaa898e6-94bd-4baf-9cf3-2109cdca188a"></p><br
 
