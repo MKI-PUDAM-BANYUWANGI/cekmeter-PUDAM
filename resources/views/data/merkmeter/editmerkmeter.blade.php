@@ -6,7 +6,7 @@
 <div class="container-fluid">
     <div class="card card-info card-outline">
         <div class="card-header bg-primary">
-            <h3 style="color:white;">Edit Tambah Data Merk Meter</h3>
+            <h3 style="color:white;">Form Ubah Data Merk Meter</h3>
             @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>

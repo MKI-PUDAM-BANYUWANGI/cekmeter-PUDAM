@@ -7,7 +7,7 @@
 <div class="container-fluid">
     <div class="card shadow mb-4">
         <div class="card-header bg-primary">
-            <h3 style="color:white;">Form Tambah Staff/User</h3>
+            <h3 style="color:white;">Form Tambah Petugas Lapangan</h3>
             @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>

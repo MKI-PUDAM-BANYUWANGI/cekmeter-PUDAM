@@ -7,7 +7,7 @@
 {{-- Tabel Data User --}}
 <div class="container-fluid">
     <div class="d-flex flex-wrap justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Data Petugas Lapang - CekMeter Air PUDAM Banyuwangi</h1>
+        <h1 class="h3 mb-0 text-gray-800">Data Petugas Lapangan - CekMeter Air PUDAM Banyuwangi</h1>
         <a href="{{ route('staff.create') }}" class="btn btn-sm btn-primary shadow-sm d-sm-inline-block d-block"><i
                 class="fas fa-plus fa-sm text-white-50"></i> Tambah Data <i></i></a>
     </div>
