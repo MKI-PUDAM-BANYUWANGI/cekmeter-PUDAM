@@ -1,7 +1,7 @@
 <p align="center"> 
-  <img width="500" alt="logo CekMeter" src="https://github.com/user-attachments/assets/eaf67e50-c8d0-4ada-8099-4267b6819b45">
+  <img width="1000" alt="logo CekMeter" src="https://github.com/user-attachments/assets/22e32f94-6902-47e4-a946-a8bbbd5d4536">
 </p>
- 
+
 # Dosen Pembimbing    : Eka Mistiko Rini, S.Kom., M.Kom
 # Pembimbing Lapangan : Sirojam Munir, SE.
 # TIM MKI
@@ -17,11 +17,8 @@ Aplikasi CekMeter Air PUDAM Banyuwangi berbasis Web ini dibuat untuk membantu pe
 
 <p align="center"><img alt="gambaran umum" src="https://github.com/user-attachments/assets/ceb82e16-1f21-4dc2-9885-27bf3ca5ccb2"></p><br>
 
-1. Admin: Admin menggunakan komputer untuk mengelola data-data yang dibutuhkan dan data tersebut akan disimpan dalam database. Data yang dikelola oleh admin meliputi data pelanggan, data petugas lapangan, data merk meter air dan log data (riwayat cek meter air pelanggan).
-2. Database: Database berfungsi sebagai pusat penyimpanan semua data yang dibutuhkan. Data ini dapat diakses dan dikelola oleh admin.
-3. Petugas Lapangan (Staff Baca Meter): Petugas lapangan mengunjungi rumah pelanggan untuk melakukan pengecekan meteran air.
-4. Aplikasi CekMerk Meter Air (di perangkat mobile): Petugas lapangan menggunakan aplikasi "CekMerk Meter Air" untuk mengecek nomor sp pelanggan lalu mengisi form yang dibutuhkan meliputi merk meter air, foto meter air, kondisi meter air, keterangan kondisi meter air lalu submit maka data akan dikirim ke server dan disimpan dalam database.
-5. Interaksi Aplikasi dengan Database: Data yang disubmit oleh petugas lapangan akan disimpan di database. Informasi ini kemudian dapat diakses kembali oleh admin melalui komputer untuk keperluan monitoring dan pelaporan pada perusahaan.
+1. Admin: Admin mengakses Aplikasi Web CekMeter Air dengan login ke aplikasi menggunakan username dan password. Setelah login akan divalidasi oleh sistem dan jika telah sesuai akan di redirect ke Dashboard Admin. Di Dashboard admin dapat mengelola Data Pelanggan, Merk Meter, Petugas Lapangan dan Log Data. Saat admin menginput atau menyunting data baru maka akan disimpan ke database, dan dari database dapat digunakan kembali untuk dapat ditampilkan di Aplikasi Web CekMeter Air.
+2. Petugas Lapangan Baca Meter : Petugas lapangan mengunjungi rumah pelanggan untuk melakukan pengecekan meteran air. Petugas lapangan menggunakan aplikasi "CekMeter Air" untuk mengecek Nomor SP pelanggan lalu mengisi form yang dibutuhkan meliputi merk meter air, kondisi meter air, keterangan kondisi meter air, mengunggah foto meter air lalu submit maka data akan dikirim ke server dan disimpan dalam database. Data dari database dapat digunakan untuk dapat menampilkan riwayat cek pelanggan di Aplikasi CekMeter Air.
 
 <br>
 
