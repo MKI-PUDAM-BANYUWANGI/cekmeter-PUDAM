@@ -15,9 +15,9 @@ class PelangganSeeder extends Seeder
     {
         Pelanggan::create([
             'no_sp' => '01223344',
-            'nama_pelanggan' => 'Rio Adjie',
-            'alamat' => ('Jajang Surat'),
-            'wilayah' => ('02 - Rogojampi')
+            'nama_pelanggan' => 'Ken Affila',
+            'alamat' => ('Giri, Banyuwangi, Jawa Timur'),
+            'kode_wilayah' => ('01')
         ]);
     }
 }

@@ -121,10 +121,10 @@
     {{-- Alert --}}
     @include('sweetalert::alert')
 
-    {{-- Script Konfirmasi Hapus Data --}}
+    {{-- Script Konfirmasi Hapus Data Pelanggan --}}
     <script>
-        function confirmDelete(id) {
-            console.log(id);
+        function confirmDelete(no_sp) {
+            console.log(no_sp);
         Swal.fire({
             title: 'Apakah Anda Yakin?',
             text: "Data ini akan dihapus secara permanen!",
@@ -137,11 +137,132 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 // Submit form delete
-                document.getElementById('delete-form-' + id).submit();
+                document.getElementById('delete-form-' + encodeURIComponent(no_sp)).submit();
             }
         })
     }
     </script>
+
+    {{-- Script Konfirmasi Hapus Data Staff --}}
+    <script>
+        function confirmDeleteStaff(nip) {
+            console.log(nip);
+        Swal.fire({
+            title: 'Apakah Anda Yakin?',
+            text: "Data ini akan dihapus secara permanen!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Hapus!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Submit form delete
+                document.getElementById('delete-form-' + encodeURIComponent(nip)).submit();
+            }
+        })
+    }
+    </script>
+
+    <!-- JavaScript untuk menampilkan Nomor SP Lengkap dan Wilayah -->
+    <script>
+        function updateNoSP() {
+        var kodeWilayah = document.getElementById('kode_wilayah').value;
+        var noSpLain = document.getElementById('no_sp_lain').value;
+
+        // Gabungkan kode wilayah dan nomor SP lainnya
+        var fullNoSp = kodeWilayah + noSpLain;
+
+        // Set nilai di span review_no_sp
+        document.getElementById('review_no_sp').textContent = fullNoSp;
+
+        // Jika kode wilayah sudah 2 digit, ambil nama wilayah
+        if (kodeWilayah.length === 2) {
+            getWilayah(kodeWilayah);
+        } else {
+            document.getElementById('review_wilayah').textContent = '';
+        }
+
+        // Tampilkan atau sembunyikan section review berdasarkan input
+        if (fullNoSp.length > 0) {
+            document.getElementById('reviewSection').style.display = 'block';
+        } else {
+            document.getElementById('reviewSection').style.display = 'none';
+        }
+    }
+
+    function getWilayah(kode) {
+        // Gunakan AJAX untuk mengambil nama wilayah berdasarkan kode wilayah
+        fetch(`/get-wilayah/${kode}`)
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Wilayah tidak ditemukan');
+                }
+            })
+            .then(data => {
+                // Tampilkan nama wilayah di span review_wilayah
+                document.getElementById('review_wilayah').textContent = data.nama_wilayah;
+            })
+            .catch(error => {
+                document.getElementById('review_wilayah').textContent = error.message;
+            });
+    }
+
+    // Reset field ketika form direset
+    function resetNoSP() {
+        document.getElementById('review_no_sp').textContent = '';
+        document.getElementById('review_wilayah').textContent = '';
+        document.getElementById('reviewSection').style.display = 'none'; // Sembunyikan review section
+    }
+    </script>
+
+    <!-- AJAX untuk Pencarian Data Pelanggan -->
+    <script>
+        $('#cari_pelanggan').click(function () {
+        var no_sp = $('#no_sp_pelanggan').val();
+
+        // AJAX untuk mencari pelanggan berdasarkan No SP
+        $.ajax({
+            url: '{{ route('pelanggan.search') }}',
+            type: 'GET',
+            data: { no_sp: no_sp },
+            success: function (data) {
+                if (data) {
+                    // Jika pelanggan ditemukan, tampilkan data pelanggan
+                    $('#pelanggan_info').html(`
+                        <div class="alert alert-info">
+                            <strong>Pelanggan Ditemukan:</strong> <br>
+                            Nama: ${data.nama_pelanggan} <br>
+                            Alamat: ${data.alamat} <br>
+                            Wilayah: ${data.wilayah} <br>
+                        </div>
+                    `);
+                    $('#pelanggan_id').val(data.no_sp); // Menyimpan ID pelanggan ke dalam hidden input
+                } else {
+                    // Jika pelanggan tidak ditemukan, tampilkan alert error
+                    $('#pelanggan_info').html(`
+                        <div class="alert alert-danger">
+                            Pelanggan tidak ditemukan.
+                        </div>
+                    `);
+                    $('#pelanggan_id').val(''); // Kosongkan input ID pelanggan jika tidak ditemukan
+                }
+            },
+            error: function () {
+                // Jika terjadi error dalam AJAX
+                $('#pelanggan_info').html(`
+                    <div class="alert alert-danger">
+                        Terjadi kesalahan saat mencari pelanggan. Silakan coba lagi.
+                    </div>
+                `);
+            }
+        });
+    });
+    </script>
+
 
 </body>
 

@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('merk_meters', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama_merk');
-            $table->string('deskripsi')->nullable();
+        Schema::create('wilayah', function (Blueprint $table) {
+            $table->string('kode_wilayah', 2)->primary();
+            $table->string('nama_wilayah');
             $table->timestamps();
         });
     }
@@ -24,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('merk_meters');
+        Schema::dropIfExists('wilayah');
     }
 };

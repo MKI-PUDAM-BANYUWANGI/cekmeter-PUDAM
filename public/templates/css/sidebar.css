@@ -26,3 +26,11 @@
     background-color: rgba(0, 123, 255, 0.1); /* Efek hover */
     border-radius: 10px; /* Menjaga sudut tetap membulat saat hover */
 }
+
+
+/* Tambahan untuk Radio Button */
+.form-group .radio-wrapper {
+    display: inline-block;
+    margin-right: 15px; /* Atur jarak antar radio button */
+}
+

@@ -38,8 +38,36 @@
                 @csrf
                 <div class="form-group">
                     <label for="no_sp">Nomor SP</label>
-                    <input type="number" id="no_sp" name="no_sp" class="form-control" placeholder="Masukan Nomor SP"
-                        required>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <select id="kode_wilayah" name="kode_wilayah" class="form-control" required onchange="updateNoSP()">
+                                <option value="" disabled selected>Pilih</option>
+                                @foreach ($wilayah as $wilayah)
+                                    <option value="{{ $wilayah['kode_wilayah'] }}">{{ $wilayah['kode_wilayah'] }} - {{ $wilayah['nama_wilayah'] }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-11">
+                            <input type="text" id="no_sp_lain" name="no_sp_lain" class="form-control"
+                                placeholder="Masukan Sisa Nomor SP" required oninput="updateNoSP()">
+                        </div>
+                    </div>
+                </div>
+                <!-- Menampilkan Review -->
+                <div class="form-group" id="reviewSection" style="display: none;">
+                    <h6><strong>Review</strong></h6>
+                    <table style="border-collapse: collapse;">
+                        <tr>
+                            <td>Nomor SP Pelanggan</td>
+                            <td>:</td>
+                            <td><span id="review_no_sp"></span></td>
+                        </tr>
+                        <tr>
+                            <td>Wilayah</td>
+                            <td>:</td>
+                            <td><span id="review_wilayah"></span></td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="form-group">
                     <label for="nama">Nama Pelanggan</label>
@@ -51,47 +79,8 @@
                     <textarea type="text" id="alamat" name="alamat" class="form-control"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="wilayah">Wilayah</label>
-                    <select id="wilayah" name="wilayah" class="form-control">
-                        <option selected disabled>Pilih Wilayah</option>
-                        <option>01 - Banyuwangi</option>
-                        <option>02 - Rogojampi</option>
-                        <option>03 - Muncar</option>
-                        <option>04 - Genteng</option>
-                        <option>05 - Wongsorejo</option>
-                        <option>06 - Tegaldlimo</option>
-                    </select>
-                </div>
-                {{-- <div class="form-group">
-                    <label for="merk_meter_id">Merk Meter</label>
-                    <select class="form-control" id="merk_meter_id" name="merk_meter_id">
-                        <option value="">Pilih Merk Meter</option>
-                        @foreach($merkmeter as $meter)
-                        <option value="{{ $meter->id }}">{{ $meter->nama_merk }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="kondisi_meter">Kondisi Meter</label>
-                    <select id="kondisi_meter" name="kondisi_meter" class="form-control">
-                        <option selected>Pilih Kondisi Meter</option>
-                        <option value="Sangat Baik">Sangat Baik</option>
-                        <option value="Baik">Baik</option>
-                        <option value="Buruk">Buruk</option>
-                        <option value="Sangat Buruk">Sangat Buruk</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="tanggal_cek">Tanggal Cek</label>
-                    <input type="date" class="form-control" id="tanggal_cek" name="tanggal_cek">
-                </div>
-                <div class="form-group">
-                    <label for="foto_meter">Foto Meter</label>
-                    <input type="file" class="form-control" id="foto_meter" name="foto_meter">
-                </div> --}}
-                <div class="form-group">
                     <button type="submit" class="btn btn-primary">Simpan Data</button>
-                    <button type="reset" class="btn btn-danger">Reset Data</button>
+                    <button type="reset" class="btn btn-danger" onclick="resetNoSP()">Reset Data</button>
                 </div>
             </form>
         </div>

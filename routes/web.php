@@ -5,8 +5,10 @@ use App\Http\Controllers\MerkMeterController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\LogDataController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\StaffController;
+use App\Http\Controllers\WilayahController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -38,7 +40,10 @@ Route::controller(LoginController::class)->group(function(){
 Route::group(['middleware' => ['auth']], function() {
     Route::get('dashboard', [LoginController::class, 'dashboard'])->name('dashboard');
     // Dashboard
-    Route::get('/dashboard', [DashboardController::class, 'index']);
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+    // Log Data
+    Route::resource('/dashboard/logdata', LogDataController::class);
+    Route::get('/pelanggan/search', [PelangganController::class, 'search'])->name('pelanggan.search');
     // Pelanggan
     Route::resource('/dashboard/pelanggan', PelangganController::class);
     // Merk Meter
@@ -50,4 +55,6 @@ Route::group(['middleware' => ['auth']], function() {
     // Ubah Password
     Route::get('/profile/ubah-password', [DashboardController::class, 'ubahpassword'])->name('ubahPassword');
     Route::post('/ubah-password', [DashboardController::class, 'changepassword'])->name('profile.ubahPassword');
+    // Get Wilayah
+    Route::get('/get-wilayah/{kode}', [WilayahController::class, 'getWilayahByKode']);
 });

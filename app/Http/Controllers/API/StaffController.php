@@ -3,132 +3,128 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\StaffResource;
 use App\Models\Staff;
 use Illuminate\Http\Request;
-//import Facade "Validator"
-use Illuminate\Support\Facades\Validator;
 
 class StaffController extends Controller
 {
     /**
-     * index
-     *
-     * @return void
+     * Display a listing of the resource.
      */
     public function index()
     {
-        //get all posts
-        $staff = Staff::latest()->paginate(5);
+        $staffs = Staff::with('wilayah')->get();
 
-        //return collection of posts as a resource
-        return new StaffResource(true, 'List Data Staff', $staff);
+        return response()->json([
+            'success' => true,
+            'message' => 'List Data Staff',
+            'data' => $staffs
+        ], 200);
     }
 
     /**
-     * Store a newly created Staff in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\JsonResponse
+     * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        // Validasi data
-        $validator = Validator::make($request->all(), [
-            'nip' => 'required',
-            'nama_staff' => 'required',
-            'no_telepon' => 'required',
-            'wilayah' => 'required',
-            'password' => 'required',
+        $validatedData = $request->validate([
+            'nip' => 'required|unique:staff,nip',
+            'nama_staff' => 'required|string|max:255',
+            'no_telepon' => 'required|string|max:15',
+            'kode_wilayah' => 'required|string|max:10',
+            'password' => 'required|string|min:6',
         ]);
 
-        // Cek apakah validasi gagal
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
-        }
-
-        // Membuat Staff baru dengan data yang valid
         $staff = Staff::create([
-            'nip' => $request->nip,
-            'nama_staff' => $request->nama_staff,
-            'no_telepon' => $request->no_telepon,
-            'wilayah' => $request->wilayah,
-            'password' => $request->password,
+            'nip' => $validatedData['nip'],
+            'nama_staff' => $validatedData['nama_staff'],
+            'no_telepon' => $validatedData['no_telepon'],
+            'kode_wilayah' => $validatedData['kode_wilayah'],
+            'password' => $validatedData['password'], // Hash password
         ]);
 
-        // Mengembalikan respon
-        return new StaffResource(true, 'Data Staff Berhasil Ditambahkan!', $staff);
+        return response()->json([
+            'success' => true,
+            'message' => 'Data Staff Berhasil Ditambahkan',
+            'data' => $staff
+        ], 201);
     }
 
     /**
-     * show
-     *
-     * @param  mixed $post
-     * @return void
+     * Display the specified resource.
      */
-    public function show($id)
+    public function show($nip)
     {
-        //find post by ID
-        $staff = Staff::find($id);
+        $staff = Staff::where('nip', $nip)->first();
 
-        //return single staff as a resource
-        return new StaffResource(true, 'Detail Data Staff!', $staff);
-    }
-
-    /**
-     * Update the specified Staff in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function update(Request $request, $id)
-    {
-        // Define validation rules
-        $validator = Validator::make($request->all(), [
-            'nip' => 'required',
-            'nama_staff' => 'required',
-            'no_telepon' => 'required',
-            'wilayah' => 'required',
-            'password' => 'required',
-        ]);
-
-        // Check if validation fails
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+        if (!$staff) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data Staff Tidak Ditemukan'
+            ], 404);
         }
 
-        // Find Staff by ID
-        $staff = Staff::findOrFail($id);
-
-        // Update Staff with new data
-        $staff->update([
-            'nip' => $request->nip,
-            'nama_staff' => $request->nama_staff,
-            'no_telepon' => $request->no_telepon,
-            'wilayah' => $request->wilayah,
-            'password' => $request->password,
-        ]);
-
-        // Return response
-        return new StaffResource(true, 'Data Staff Berhasil Diubah!', $staff);
+        return response()->json([
+            'success' => true,
+            'message' => 'Detail Data Staff',
+            'data' => $staff
+        ], 200);
     }
 
     /**
-     * Remove the specified Staff from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
+     * Update the specified resource in storage.
      */
-    public function destroy($id)
+    public function update(Request $request, $nip)
     {
-        // Find Staff by ID
-        $staff = Staff::findOrFail($id);
+        $staff = Staff::where('nip', $nip)->first();
 
-        // Delete Staff
+        if (!$staff) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data Staff Tidak Ditemukan'
+            ], 404);
+        }
+
+        $validatedData = $request->validate([
+            'nama_staff' => 'required|string|max:255',
+            'no_telepon' => 'required|string|max:15',
+            'kode_wilayah' => 'required|string|max:10',
+            'password' => 'nullable|string|min:6',
+        ]);
+
+        $staff->update([
+            'nama_staff' => $validatedData['nama_staff'],
+            'no_telepon' => $validatedData['no_telepon'],
+            'kode_wilayah' => $validatedData['kode_wilayah'],
+            'password' => $validatedData['password'],
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data Staff Berhasil Diupdate',
+            'data' => $staff
+        ], 200);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy($nip)
+    {
+        $staff = Staff::where('nip', $nip)->first();
+
+        if (!$staff) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data Staff Tidak Ditemukan'
+            ], 404);
+        }
+
         $staff->delete();
 
-        // Return response
-        return new StaffResource(true, 'Data Staff Berhasil Dihapus!', null);
+        return response()->json([
+            'success' => true,
+            'message' => 'Data Staff Berhasil Dihapus'
+        ], 200);
     }
 }

@@ -5,7 +5,10 @@
         <div class="sidebar-brand-icon">
             <img src="{{ asset('../assets/logo-cekmeter.png') }}" alt="cek-meter" width="100%">
         </div>
-        <div class="sidebar-brand-text mx-3">Admin Dashboard</div>
+        <div class="sidebar-brand-text mt-3">
+            <h3 style="font-size: 15px; margin-bottom: 0; font-weight: bold;">Cek Meter</h3>
+            <p style="font-size: 12px; margin-top: 0;">PUDAM Banyuwangi</p>
+        </div>
     </a>
 
     <!-- Divider -->
@@ -13,9 +16,9 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item @if(Request::is('dashboard')) active @endif">
-        <a class="nav-link" href="/dashboard">
+        <a class="nav-link" href="{{ route('dashboard.index') }}">
             <i class="fas fa-fw fa-home"></i>
-            <span>Beranda</span>
+            <span>Dashboard</span>
         </a>
     </li>
 
@@ -24,8 +27,16 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">
-        Data
+        Menu
     </div>
+
+    <!-- Nav Item - Log Data -->
+    <li class="nav-item @if(Route::is('logdata.index')) active @endif">
+        <a class="nav-link" href="{{ route('logdata.index') }}">
+            <i class="fas fa-fw fa-database"></i>
+            <span>Log Data</span>
+        </a>
+    </li>
 
     <!-- Nav Item - Data Pelanggan -->
     <li class="nav-item @if(Route::is('pelanggan.index')) active @endif">
@@ -47,7 +58,7 @@
     <li class="nav-item @if(Route::is('staff.index')) active @endif">
         <a class="nav-link" href="{{ route('staff.index') }}">
             <i class="fas fa-fw fa-user"></i>
-            <span>Staff/User</span>
+            <span>Petugas Lapang</span>
         </a>
     </li>
 

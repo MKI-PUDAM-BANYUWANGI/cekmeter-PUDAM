@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\API\ApiLogDataController;
+use App\Http\Controllers\API\ApiLoginController;
+use App\Http\Controllers\API\MerkMeterController;
+use App\Http\Controllers\API\PelangganController;
+use App\Http\Controllers\API\StaffController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,15 +19,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('auth')->group(function () {
+    Route::post('/login', [ApiLoginController::class, 'login'])->middleware('api');
+    Route::middleware('auth:sanctum')->group(function () {
+        // Login
+        Route::post('/logout', [ApiLoginController::class, 'logout']);
+        Route::get('/user-profile', [ApiLoginController::class, 'userProfile']);
+
+        // Pelanggan
+        Route::apiResource('pelanggan', PelangganController::class);
+        Route::post('pelanggan/search', [PelangganController::class, 'search']);
+
+        // Merk Meter
+        Route::apiResource('merk-meter', MerkMeterController::class);
+
+        // Staff
+        Route::apiResource('staff', StaffController::class);
+
+        // Log Data
+        Route::apiResource('log-data', ApiLogDataController::class);
+    });
 });
-
-// Pelanggan
-Route::apiResource('/pelanggan', App\Http\Controllers\API\PelangganController::class);
-
-// Merk Meter
-Route::apiResource('/merk-meter', App\Http\Controllers\API\MerkMeterController::class);
-
-// Staff
-Route::apiResource('/staff', App\Http\Controllers\API\StaffController::class);

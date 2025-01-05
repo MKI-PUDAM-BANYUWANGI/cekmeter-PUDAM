@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,34 +11,27 @@ class Pelanggan extends Model
 
     protected $table = 'pelanggans';
 
+    // Atur Primary Key ke no_sp
+    protected $primaryKey = 'no_sp';
+    public $incrementing = false; // Karena no_sp bukan auto-increment
+    protected $keyType = 'string'; // Karena no_sp bertipe string
+
     protected $fillable = [
-        'id',
         'no_sp',
         'nama_pelanggan',
         'alamat',
-        'wilayah',
-        'foto_meter',
-        'merk_meter_id',
-        'kondisi_meter',
-        'tanggal_cek'
+        'kode_wilayah'
     ];
 
-    protected $hidden = [];
-
-    public function merkMeter()
+    // Relasi dengan Log Data
+    public function logData()
     {
-        return $this->belongsTo(MerkMeter::class, 'merk_meter_id');
+        return $this->belongsTo(LogData::class, 'no_sp', 'no_sp');
     }
 
-    // /**
-    //  * image
-    //  *
-    //  * @return Attribute
-    //  */
-    // protected function image(): Attribute
-    // {
-    //     return Attribute::make(
-    //         get: fn ($image) => url('/storage/posts/' . $image),
-    //     );
-    // }
+    // Definisikan relasi dengan Wilayah
+    public function wilayah()
+    {
+        return $this->belongsTo(Wilayah::class, 'kode_wilayah', 'kode_wilayah');
+    }
 }

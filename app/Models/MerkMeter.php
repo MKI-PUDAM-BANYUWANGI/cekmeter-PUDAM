@@ -10,12 +10,17 @@ class MerkMeter extends Model
     use HasFactory;
     protected $table = 'merk_meters';
 
-    protected $fillable = ['nama_merk'];
+    protected $fillable = ['nama_merk', 'deskripsi'];
 
     protected $hidden = [];
 
     public function getRouteKeyName()
     {
         return 'id';
+    }
+
+    public function logData()
+    {
+        return $this->hasMany(LogData::class, 'merk_meter_id');
     }
 }

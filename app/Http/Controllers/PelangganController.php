@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pelanggan;
-use App\Http\Requests\StorePelangganRequest;
-use App\Http\Requests\UpdatePelangganRequest;
-use App\Models\MerkMeter;
+use App\Models\Wilayah;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 
 
@@ -19,7 +16,8 @@ class PelangganController extends Controller
     public function index()
     {
         $pelanggan = Pelanggan::all();
-        return view('data.pelanggan.pelanggan', compact('pelanggan'));
+        $wilayah = Wilayah::all();
+        return view('data.pelanggan.pelanggan', compact('pelanggan', 'wilayah'));
     }
 
     /**
@@ -27,8 +25,8 @@ class PelangganController extends Controller
      */
     public function create()
     {
-        $merkmeter = MerkMeter::all();
-        return view('data.pelanggan.tambah-pelanggan', compact('merkmeter'));
+        $wilayah = Wilayah::all();
+        return view('data.pelanggan.tambah-pelanggan', compact('wilayah'));
     }
 
     /**
@@ -36,37 +34,41 @@ class PelangganController extends Controller
      */
     public function store(Request $request)
     {
-        // Validasi data
-        $this->validate($request, [
-            'no_sp' => 'required',
-            'nama_pelanggan' => 'required',
-            'alamat' => 'required',
-            'wilayah' => 'required|not_in:Pilih Wilayah',
-            'merk_meter_id' => 'nullable|exists:merk_meters,id',
-            'kondisi_meter' => 'nullable',
-            'tanggal_cek' => 'nullable|date',
-            'foto_meter' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120'
+        // Validasi input
+        $request->validate([
+            'kode_wilayah' => 'required|string|size:2',  // Harus 2 karakter
+            'no_sp_lain' => 'required|string|max:255',
+            'nama_pelanggan' => 'required|string|max:255',
+            'alamat' => 'required|string',
         ]);
 
-        // Mengambil semua data request kecuali 'foto_meter'
-        $pelangganData = $request->except('foto_meter');
+        // Gabungkan kode wilayah dan nomor SP lain
+        $no_sp = $request->kode_wilayah . $request->no_sp_lain;
 
-        // Jika ada file yang diunggah
-        if ($request->hasFile('foto_meter')) {
-            // Menyimpan file dan mendapatkan path-nya
-            $filePath = $request->file('foto_meter')->store('pelanggan', 'public');
-            $pelangganData['foto_meter'] = $filePath;
+        // Cari wilayah berdasarkan kode_wilayah
+        $wilayah = Wilayah::where('kode_wilayah', $request->kode_wilayah)->first();
+
+        if ($wilayah) {
+            // Simpan data pelanggan
+            Pelanggan::create([
+                'no_sp' => $no_sp,
+                'nama_pelanggan' => $request->nama_pelanggan,
+                'alamat' => $request->alamat,
+                'kode_wilayah' => $wilayah->kode_wilayah,  // Simpan wilayah berdasarkan kode_wilayah yang ditemukan
+            ]);
+
+            // Menampilkan SweetAlert
+            Alert::success('Berhasil!', 'Data Pelanggan Berhasil Ditambahkan!');
+            // Redirect ke halaman index dengan pesan sukses
+            return redirect()->route('pelanggan.index');
         }
 
-        // Membuat data pelanggan
-        Pelanggan::create($pelangganData);
-
         // Menampilkan SweetAlert
-        Alert::success('Berhasil!', 'Data Pelanggan Berhasil Ditambahkan!');
-
+        Alert::info('Maaf!', 'Wilayah Tidak Ditemukan');
         // Redirect ke halaman index dengan pesan sukses
-        return redirect()->route('pelanggan.index');
+        return redirect()->route('pelanggan.create');
     }
+
 
     /**
      * Display the specified resource.
@@ -79,61 +81,85 @@ class PelangganController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit($no_sp)
     {
-        $pelanggan = Pelanggan::findOrFail($id);
-        $merkmeter = MerkMeter::all();
-        return view('data.pelanggan.edit-pelanggan', compact('pelanggan', 'merkmeter'));
+        $pelanggan = Pelanggan::findOrFail($no_sp); // Cari berdasarkan no_sp
+        $wilayah = Wilayah::all();
+        return view('data.pelanggan.edit-pelanggan', compact('pelanggan', 'wilayah'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $no_sp)
     {
-        $this->validate($request, [
-            'no_sp' => 'required',
-            'nama_pelanggan' => 'required',
-            'alamat' => 'required',
-            'wilayah' => 'required|not_in:Pilih Wilayah',
-            'merk_meter_id' => 'nullable|exists:merk_meters,id',
-            'kondisi_meter' => 'nullable',
-            'tanggal_cek' => 'nullable|date',
-            'foto_meter' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120'
+        // Validasi input
+        $validatedData = $request->validate([
+            'kode_wilayah' => 'required|string|size:2', // Kode wilayah harus 2 karakter
+            'no_sp_lain' => 'required|string|max:255', // Bagian nomor SP lainnya
+            'nama_pelanggan' => 'required|string|max:255',
+            'alamat' => 'required|string',
         ]);
 
-        $pelanggan = Pelanggan::findOrFail($id);
-        $pelangganData = $request->except('foto_meter');
+        // Gabungkan kode wilayah dan nomor SP lainnya
+        $new_no_sp = $request->kode_wilayah . $request->no_sp_lain;
 
-        if ($request->hasFile('foto_meter')) {
-            // Delete old file if exists
-            if ($pelanggan->foto_meter && Storage::exists($pelanggan->foto_meter)) {
-                Storage::delete($pelanggan->foto_meter);
-            }
+        // Cari wilayah berdasarkan kode_wilayah
+        $wilayah = Wilayah::where('kode_wilayah', $request->kode_wilayah)->first();
 
-            // Store new file and get its path
-            $filePath = $request->file('foto_meter')->store('pelanggan', 'public');
-            $pelangganData['foto_meter'] = $filePath;
+        if ($wilayah) {
+            // Temukan data pelanggan yang akan diupdate
+            $pelanggan = Pelanggan::findOrFail($no_sp);
+
+            // Update data pelanggan
+            $pelanggan->update([
+                'no_sp' => $new_no_sp,
+                'nama_pelanggan' => $request->nama_pelanggan,
+                'alamat' => $request->alamat,
+                'kode_wilayah' => $wilayah->kode_wilayah, // Update wilayah berdasarkan kode_wilayah yang ditemukan
+            ]);
+
+            // Menampilkan SweetAlert
+            Alert::success('Berhasil!', 'Data Pelanggan Berhasil Diperbarui!');
+            return redirect()->route('pelanggan.index');
         }
 
-        $pelanggan->update($pelangganData);
-
-        // Menampilkan SweetAlert
-        Alert::success('Berhasil!', 'Data Pelanggan Berhasil Diperbarui!');
-
-        return redirect()->route('pelanggan.index');
+        // Menampilkan SweetAlert jika wilayah tidak ditemukan
+        Alert::info('Maaf!', 'Wilayah Tidak Ditemukan');
+        return redirect()->back();
     }
 
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pelanggan $pelanggan)
+    public function destroy($no_sp)
     {
+        $pelanggan = Pelanggan::findOrFail($no_sp); // Cari berdasarkan no_sp
         $pelanggan->delete();
+
         // Menampilkan SweetAlert
         Alert::success('Berhasil!', 'Data Pelanggan Berhasil Dihapus!');
-
         return redirect()->route('pelanggan.index');
+    }
+
+    // Search
+    public function search(Request $request)
+    {
+        $no_sp = $request->input('no_sp');
+        $pelanggan = Pelanggan::with('wilayah') // Mengambil data relasi wilayah
+        ->where('no_sp', $no_sp)
+        ->first();
+
+        if ($pelanggan) {
+            return response()->json([
+                'nama_pelanggan' => $pelanggan->nama_pelanggan,
+                'alamat' => $pelanggan->alamat,
+                'wilayah' => $pelanggan->wilayah->nama_wilayah ?? 'Tidak Diketahui',
+                'no_sp' => $pelanggan->no_sp
+            ]);
+        } else {
+            return response()->json(null, 404); // Jika pelanggan tidak ditemukan
+        }
     }
 }
