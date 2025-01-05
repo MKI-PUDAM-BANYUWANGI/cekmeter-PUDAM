@@ -11,11 +11,12 @@
 <br><br>
 
 #  💻 Tentang Aplikasi CekMeter Air PUDAM Banyuwangi berbasis Web
-Aplikasi CekMeter Air PUDAM Banyuwangi berbasis Web ini 
+Aplikasi CekMeter Air PUDAM Banyuwangi berbasis Web ini dibuat untuk membantu petugas baca meter PUDAM Banyuwangi dalam mendata Merk Meter dan Kondisi dari Meteran Air di Rumah Pelanggan
 
 ## 📸 Gambaran Umum Aplikasi 
 
-<p align="center"><img alt="desain umum" src="https://github.com/pbl-persero-batam/pbl-manrisk-perserobatam/assets/92602362/2adec1e8-4b36-421a-967c-ab257e126af6"></p><br>
+<p align="center"><img alt="gambaran umum" src="https://github.com/user-attachments/assets/ceb82e16-1f21-4dc2-9885-27bf3ca5ccb2"></p><br>
+
 1. Admin: Admin menggunakan komputer untuk mengelola data-data yang dibutuhkan dan data tersebut akan disimpan dalam database. Data yang dikelola oleh admin meliputi data pelanggan, data petugas lapangan, data merk meter air dan log data (riwayat cek meter air pelanggan).
 2. Database: Database berfungsi sebagai pusat penyimpanan semua data yang dibutuhkan. Data ini dapat diakses dan dikelola oleh admin.
 3. Petugas Lapangan (Staff Baca Meter): Petugas lapangan mengunjungi rumah pelanggan untuk melakukan pengecekan meteran air.
@@ -25,8 +26,11 @@ Aplikasi CekMeter Air PUDAM Banyuwangi berbasis Web ini
 <br>
 
 ## 📝 Spesifikasi Aplikasi
-<p align="center"><img alt="desain umum" src="https://github.com/pbl-persero-batam/pbl-manrisk-perserobatam/assets/92602362/2adec1e8-4b36-421a-967c-ab257e126af6"></p><br>
+**Use Case Diagram**
+<p align="center"><img alt="use case" src="https://github.com/user-attachments/assets/aaa898e6-94bd-4baf-9cf3-2109cdca188a"></p><br
 
+**Entity Relationship Diagram**
+<p align="center"><img alt="erd" src="https://github.com/user-attachments/assets/ade48382-32d5-4949-85f4-a3e0e80997a4"></p><br>
 
 
 # 📃 Cara Install Aplikasi dengan Framework Laravel
