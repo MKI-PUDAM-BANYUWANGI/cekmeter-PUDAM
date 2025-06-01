@@ -34,7 +34,7 @@
             @endif
         </div>
         <div class="card-body">
-            <form action="{{ route('pelanggan.update', $pelanggan->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('pelanggan.update', $pelanggan->no_sp) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <!-- Menggunakan method PUT untuk update -->

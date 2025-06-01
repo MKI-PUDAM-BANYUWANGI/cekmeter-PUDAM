@@ -6,9 +6,9 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Data Pelanggan PUDAM Banyuwangi</h1>
-        <a href="{{ route('pelanggan.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+    <div class="d-flex flex-wrap justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Data Pelanggan - CekMeter Air PUDAM Banyuwangi</h1>
+        <a href="{{ route('pelanggan.create') }}" class="btn btn-sm btn-primary shadow-sm d-sm-inline-block d-block"><i
                 class="fas fa-plus fa-sm text-white-50"></i> Tambah Data <i></i></a>
     </div>
 
@@ -42,14 +42,17 @@
                             <td>{{ $object ->wilayah->nama_wilayah }}</td>
                             <td>
                                 <!-- Update Button -->
-                                <a href="{{ route('pelanggan.edit', $object->id)}}" class="btn btn-info"><i
+                                <a href="{{ route('pelanggan.edit', $object->no_sp)}}" class="btn btn-info"><i
                                         class="fas fa-edit"></i></a>
                                 <!-- Delete Button -->
-                                <form id="delete-form-{{ $object->id }}" action="{{route('pelanggan.destroy', $object->id)}}" method="POST" class="d-inline">
+                                <form id="delete-form-{{ $object->no_sp }}"
+                                    action="{{ route('pelanggan.destroy', $object->no_sp) }}" method="POST"
+                                    class="d-inline">
                                     @csrf
                                     @method('DELETE')
                                     <!-- Perbaikan tombol delete -->
-                                    <button type="button" class="btn btn-danger" onclick="confirmDelete({{ $object->id }})">
+                                    <button type="button" class="btn btn-danger"
+                                        onclick="confirmDelete('{{ $object->no_sp }}')">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </form>

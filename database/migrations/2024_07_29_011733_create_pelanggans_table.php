@@ -12,11 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pelanggans', function (Blueprint $table) {
-            $table->id();
-            $table->string('no_sp');
+            $table->string('no_sp')->primary(); // Jadikan no_sp sebagai Primary Key
             $table->string('nama_pelanggan');
             $table->text('alamat');
-            $table->unsignedBigInteger('wilayah_id');  // Foreign key ke tabel wilayah
+            $table->string('kode_wilayah');  // Foreign key ke tabel wilayah
             $table->timestamps();
         });
     }

@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('staffs', function (Blueprint $table) {
-            $table->id();
-            $table->string('nip', 25);
+        Schema::create('staff', function (Blueprint $table) {
+            $table->string('nip', 25)->primary();
             $table->string('nama_staff', 50);
             $table->string('no_telepon', 25);
-            $table->string('wilayah', 50);
+            $table->string('kode_wilayah');  // Foreign key ke tabel wilayah
             $table->string('password', 50);
             $table->timestamps();
         });
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('staffs');
+        Schema::dropIfExists('staff');
     }
 };

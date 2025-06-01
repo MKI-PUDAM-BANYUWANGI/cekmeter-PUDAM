@@ -40,9 +40,10 @@ Route::controller(LoginController::class)->group(function(){
 Route::group(['middleware' => ['auth']], function() {
     Route::get('dashboard', [LoginController::class, 'dashboard'])->name('dashboard');
     // Dashboard
-    Route::get('/dashboard', [DashboardController::class, 'index']);
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
     // Log Data
     Route::resource('/dashboard/logdata', LogDataController::class);
+    Route::get('/pelanggan/search', [PelangganController::class, 'search'])->name('pelanggan.search');
     // Pelanggan
     Route::resource('/dashboard/pelanggan', PelangganController::class);
     // Merk Meter

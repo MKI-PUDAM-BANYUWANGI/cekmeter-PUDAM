@@ -1,6 +1,6 @@
 @extends('layout.dashboard-layout')
 
-@section('title','Admin Dashboard - Edit Pelanggan')
+@section('title','Admin Dashboard - Edit Log Data')
 
 @section('main-content')
 <div class="container-fluid">
@@ -38,24 +38,33 @@
                 @csrf
                 @method('PUT')
                 <div class="form-group">
-                    <label for="petugas_id">ID Petugas</label>
+                    <label for="petugas_id">NIP Petugas</label>
                     <select class="form-control" id="petugas_id" name="petugas_id">
-                        <option value="">Pilih ID</option>
+                        <option value="">Pilih Petugas</option>
                         @foreach($staff as $petugas)
-                        <option value="{{ $petugas->id }}" {{ $petugas->id == $logdata->merk_meter_id ? 'selected' : ''
-                            }}>{{ $petugas->nip }}-{{ $petugas->nama_staff }}</option>
+                        <option value="{{ $petugas->nip }}"
+                            {{ old('petugas_id', $logdata->petugas_id) == $petugas->nip ? 'selected' : '' }}>
+                            {{ $petugas->nip }} - {{ $petugas->nama_staff }}
+                        </option>
                         @endforeach
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="pelanggan_id">No SP Pelanggan</label>
-                    <select class="form-control" id="pelanggan_id" name="pelanggan_id">
-                        <option value="">No SP Pelanggan</option>
-                        @foreach($pelanggan as $pelanggans)
-                        <option value="{{ $pelanggans->id }}" {{ $pelanggans->id == $logdata->pelanggan_id ? 'selected'
-                            : '' }}>{{ $pelanggans->no_sp }}-{{ $pelanggans->nama_pelanggan }}</option>
-                        @endforeach
-                    </select>
+                    <label for="no_sp_pelanggan">No SP Pelanggan</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="no_sp_pelanggan" name="no_sp_pelanggan"
+                            value="{{ old('no_sp_pelanggan', $logdata->pelanggan->no_sp ?? '') }}" placeholder="Masukkan No SP Pelanggan">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button" id="cari_pelanggan">Cari</button>
+                        </div>
+                    </div>
+                    <input type="hidden" id="pelanggan_id" name="no_sp" value="{{ $logdata->pelanggan_id }}">
+                </div>
+                <div id="pelanggan_info" class="mt-3">
+                    {{-- menampilkan info pelanggan jika ada --}}
+                    @if ($logdata->pelanggan)
+                        <p><strong>Nama Pelanggan:</strong> {{ $logdata->pelanggan->nama_pelanggan }}</p>
+                    @endif
                 </div>
                 <div class="form-group">
                     <label for="merk_meter_id">Merk Meter</label>
